@@ -1,0 +1,2 @@
+// every deadlock state is a final state (established or given up)
+filter(forall, "deadlock" => "done")

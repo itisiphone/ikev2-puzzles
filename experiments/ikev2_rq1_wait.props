@@ -1,0 +1,5 @@
+// E7 (Discussion): wait-window mitigation. T is set with -const.
+const double T;
+
+// legitimate SA established within T (we report 1 - this)
+P=? [ F<=T "established" ]

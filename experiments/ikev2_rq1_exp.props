@@ -1,0 +1,12 @@
+// Experiment properties for RQ1 (E1-E3). T is set with -const.
+const double T;
+
+// E1, E2: legitimate SA established within T (the figure plots 1 - this)
+P=? [ F<=T "established" ]
+
+// E2: the initiator starts solving a forged puzzle within T
+P=? [ F<=T "solving_forged" ]
+
+// E3: CPU seconds within T, initiator and attacker
+R{"init_cpu"}=? [ C<=T ]
+R{"att_cpu"}=? [ C<=T ]

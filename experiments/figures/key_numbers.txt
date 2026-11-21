@@ -1,0 +1,18 @@
+E1  P(no IKE SA within 60 s), rows D_max, columns forged d_f (0 = ZBC 0):
+      D_max         0       20       24       28
+         16    1.0000   1.0000   1.0000   1.0000
+         18    0.2227   0.0002   0.0002   0.0002
+         20    0.6329   0.6329   0.0002   0.0002
+         24    0.9366   0.6329   0.9366   0.0002
+       none    0.9433   0.6329   0.9366   0.9433
+E2  P(no IKE SA within 60 s), d_f = 24, D_max = 24, by ratio_F: 0.5: 0.575, 1: 0.795, 1.5: 0.890, 2: 0.937, 2.5: 0.961, 3: 0.975, 3.5: 0.983, 4: 0.988, 4.5: 0.992, 5: 0.994
+E4  no-attack legitimate success rate: 0.9752
+E4  T2 no defence       success at max rate 200/s: 0.122
+E4  T2 cookie only      success at max rate 200/s: 0.242
+E4  T2 cookie + puzzle  success at max rate 200/s: 0.454
+E4  T3 no defence       success at max rate 500/s: 0.049
+E4  T3 cookie only      success at max rate 500/s: 0.049
+E4  T3 cookie + puzzle  success at max rate 500/s: 0.842
+E6  T2 (100 req/s): smallest k with success >= 95% of no-attack level: 20; success by k: 8: 0.478, 10: 0.478, 12: 0.478, 14: 0.478, 16: 0.478, 18: 0.478, 20: 0.975, 22: 0.975, 24: 0.975
+E6  T3 (300 req/s): smallest k with success >= 95% of no-attack level: 20; success by k: 8: 0.081, 10: 0.081, 12: 0.081, 14: 0.081, 16: 0.230, 18: 0.842, 20: 0.975, 22: 0.975, 24: 0.975
+E6  legitimate solve time 4*2^k*t_PRF (s): 8: 0.00185, 10: 0.0074, 12: 0.0296, 14: 0.118, 16: 0.474, 18: 1.89, 20: 7.58, 22: 30.3, 24: 121

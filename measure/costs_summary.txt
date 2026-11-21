@@ -1,0 +1,30 @@
+Cost measurements
+=========================
+date        : 2026-11-20 16:45:26
+cpu         : Intel(R) Core(TM) Ultra 5 125H (~2995 MHz reported)
+logical cpus: 18
+os          : Windows-11-10.0.26200-SP0
+python      : 3.13.5 (CPython)
+openssl     : OpenSSL 3.0.16 11 Feb 2025
+mode        : full  reps=30
+
+PRF call (hmac.digest, C level)      : 1.807 us
+PRF call inside Python solver loop   : 7.593 us (ratio 4.20; fitted on k >= 18)
+Puzzle cost law check (mean seconds vs 4*2^k*t_try):
+   k= 8  measured    0.0022 s   predicted    0.0078 s   n=30
+   k=10  measured    0.0276 s   predicted    0.0311 s   n=30
+   k=12  measured    0.1173 s   predicted    0.1244 s   n=30
+   k=14  measured    0.5053 s   predicted    0.4976 s   n=30
+   k=16  measured    0.7672 s   predicted    1.9903 s   n=30
+   k=18  measured    9.5862 s   predicted    7.9613 s   n=30
+   k=20  measured   28.9205 s   predicted   31.8453 s   n=5
+
+PRISM constants (suite A = X25519 + ECDSA P-256; suite B in comments = MODP-2048 + RSA-2048)
+// paste into ikev2_rq1.sm and ikev2_rq2.sm, replacing the earlier values
+const double t_PRF     = 1.807093e-06;   // HMAC-SHA-256, one call
+const double t_cookie  = 6.148366e-07;   // SHA-256 cookie
+const double t_dh_gen  = 9.301644e-05;   // X25519 key pair   (B: 1.059553e-03)
+const double t_dh_auth = 1.621384e-04;   // X25519 shared + SK_* derivation   (B: 6.983054e-03)
+const double t_sig     = 1.810726e-04;   // ECDSA P-256, mean of sign and verify   (B: 1.296346e-03)
+
+total run time: 626.8 s

@@ -1,0 +1,20 @@
+Started 2026/11/20 17:23:25.00 
+E1 E1_Dmax16_df20-28 start 17:23:25.00 
+E1 E1_Dmax16_df0 start 17:23:27.60 
+E1 E1_Dmax18_df20-28 start 17:23:28.76 
+E1 E1_Dmax18_df0 start 17:31:22.60 
+E1 E1_Dmax20_df20-28 start 17:34:39.24 
+E1 E1_Dmax20_df0 start 17:43:09.87 
+E1 E1_Dmax24_df20-28 start 17:46:17.38 
+E1 E1_Dmax24_df0 start 17:55:07.50 
+E1 E1_Dmax255_df20-28 start 17:57:57.85 
+E1 E1_Dmax255_df0 start 18:05:58.91 
+E2 E2_ratio start 18:05:59.48 
+E4 E4_baseline start 18:56:31.09 
+E4 E4_T2 start 18:56:34.37 
+E4 E4_T3 start 18:59:45.14 
+E5 E5_k18 start 19:00:14.70 
+E5 E5_k20 start 19:04:55.58 
+E6 E6_T2 start 19:14:21.16 
+E6 E6_T3 start 19:14:34.58 
+Finished 2026/11/20 19:14:40.04 

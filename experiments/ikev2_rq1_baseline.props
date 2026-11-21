@@ -1,0 +1,8 @@
+// E0: M1 without attack. T is set with -const.
+const double T;
+
+// legitimate SA established within T
+P=? [ F<=T "established" ]
+
+// every deadlock state is a final state (established or given up)
+filter(forall, "deadlock" => "done")

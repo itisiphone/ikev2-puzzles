@@ -1,0 +1,11 @@
+// Experiment properties for RQ2 (E4-E6)
+
+// E4, E5: long-run share of time the half-open SA table is full
+S=? [ "resp_full" ]
+
+// E4, E6: long-run share of legitimate attempts that complete
+R{"legit_success"}=? [ S ]
+
+// E6: CPU seconds per second, responder and attacker (their ratio)
+R{"resp_cpu"}=? [ S ]
+R{"att_cpu"}=? [ S ]

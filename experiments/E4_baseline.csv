@@ -1,0 +1,15 @@
+"S=? [ ""resp_full"" ]"
+Result
+0
+
+"R{""legit_success""}=? [ S ]"
+Result
+0.975197083819
+
+"R{""resp_cpu""}=? [ S ]"
+Result
+0.00061730004
+
+"R{""att_cpu""}=? [ S ]"
+Result
+0

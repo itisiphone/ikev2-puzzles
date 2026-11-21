@@ -1,0 +1,14 @@
+"P=? [ F<=T ""established"" ]"
+defense,T,Result
+0,10,0.999992858516
+0,60,0.999992858516
+1,10,0.999992395974
+1,60,0.999992395975
+2,10,0.999013286847
+2,60,0.999947558733
+
+"filter(forall, ""deadlock""=>""done"")"
+defense,Result
+0,true
+1,true
+2,true

@@ -1,0 +1,156 @@
+PRISM
+=====
+
+Version: 4.10.1
+Date: Sat Nov 21 12:06:09 2026
+Memory limits: cudd=1g, java(heap)=7.9g
+Command line: prism ikev2_rq2.sm 'experiments\ikev2_rq2_exp.props' -jacobi -maxiters 100000 -const 'attack=0,defense=0,lam_att=0,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=18' -exportresults 'experiments\V_jacobi_E4_baseline.csv:csv'
+
+Parsing PRISM model file "ikev2_rq2.sm"...
+
+Type:        CTMC
+Modules:     responder
+Actions:     [l_arrive] [l_done] [l_expire] [a_arrive] [a_serve] [a_expire]
+Variables:   ha hl q
+Labels:      "resp_full" "cpu_saturated" "legit_blocked"
+Rewards:     "legit_success" "resp_cpu" "att_cpu" "resp_mem"
+
+Parsing properties file "experiments\ikev2_rq2_exp.props"...
+
+4 properties:
+(1) S=? [ "resp_full" ]
+(2) R{"legit_success"}=? [ S ]
+(3) R{"resp_cpu"}=? [ S ]
+(4) R{"att_cpu"}=? [ S ]
+
+---------------------------------------------------------------------
+
+Model checking: S=? [ "resp_full" ]
+Model constants: attack=0,defense=0,lam_att=0,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=18
+
+Building model (engine:symbolic)...
+Model constants: attack=0,defense=0,lam_att=0,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=18
+
+Warning: Guard for command 4 of module "responder" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 6 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 51 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Time for model construction: 0.038 seconds.
+
+Type:        CTMC
+States:      51 (1 initial)
+Transitions: 100
+
+Rate matrix: 706 nodes (52 terminal), 100 minterms, vars: 16r/16c
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:51
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=714] [33.5 KB]
+Adding explicit sparse matrices... [levels=16, num=1, compact] [0.8 KB]
+Creating vector for diagonals... [dist=51, compact] [0.5 KB]
+Allocating iteration vectors... [2 x 0.4 KB]
+TOTAL: [35.6 KB]
+
+Starting iterations...
+
+Jacobi: 100000 iterations in 0.02 seconds (average 0.000000, setup 0.00)
+
+Error: Iterative method did not converge within 100000 iterations.
+Consider using a different numerical method or increasing the maximum number of iterations.
+
+---------------------------------------------------------------------
+
+Model checking: R{"legit_success"}=? [ S ]
+Model constants: attack=0,defense=0,lam_att=0,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=18
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:51
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=714] [33.5 KB]
+Adding explicit sparse matrices... [levels=16, num=1, compact] [0.8 KB]
+Creating vector for diagonals... [dist=51, compact] [0.5 KB]
+Allocating iteration vectors... [2 x 0.4 KB]
+TOTAL: [35.6 KB]
+
+Starting iterations...
+
+Jacobi: 100000 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Error: Iterative method did not converge within 100000 iterations.
+Consider using a different numerical method or increasing the maximum number of iterations.
+
+---------------------------------------------------------------------
+
+Model checking: R{"resp_cpu"}=? [ S ]
+Model constants: attack=0,defense=0,lam_att=0,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=18
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:51
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=714] [33.5 KB]
+Adding explicit sparse matrices... [levels=16, num=1, compact] [0.8 KB]
+Creating vector for diagonals... [dist=51, compact] [0.5 KB]
+Allocating iteration vectors... [2 x 0.4 KB]
+TOTAL: [35.6 KB]
+
+Starting iterations...
+
+Jacobi: 100000 iterations in 0.05 seconds (average 0.000000, setup 0.01)
+
+Error: Iterative method did not converge within 100000 iterations.
+Consider using a different numerical method or increasing the maximum number of iterations.
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ S ]
+Model constants: attack=0,defense=0,lam_att=0,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=18
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:51
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=714] [33.5 KB]
+Adding explicit sparse matrices... [levels=16, num=1, compact] [0.8 KB]
+Creating vector for diagonals... [dist=51, compact] [0.5 KB]
+Allocating iteration vectors... [2 x 0.4 KB]
+TOTAL: [35.6 KB]
+
+Starting iterations...
+
+Jacobi: 100000 iterations in 0.03 seconds (average 0.000000, setup 0.00)
+
+Error: Iterative method did not converge within 100000 iterations.
+Consider using a different numerical method or increasing the maximum number of iterations.
+
+Exporting results as list (CSV) to file "experiments\V_jacobi_E4_baseline.csv"...
+
+---------------------------------------------------------------------
+
+Note: There were 3 warnings during computation.
+
