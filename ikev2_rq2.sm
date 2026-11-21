@@ -1,0 +1,126 @@
+// IKEv2 + RFC 8019 -- CTMC model for RQ2 (threats T2 and T3), responder view
+// Paper: Quantifying the DoS Resistance of IKEv2 Client Puzzles with
+//        Probabilistic Model Checking
+//
+// RQ1 (forged puzzles, T1) is analysed with ikev2_rq1.sm, which follows one
+// legitimate session message by message. RQ2 is about the responder under
+// sustained load, so this model aggregates traffic into counters:
+//   ha  half-open SAs created by the attacker
+//   hl  half-open SAs of legitimate initiators
+//   q   attack jobs waiting for the responder CPU
+// Both models share the cost constants and the RFC 8019 semantics.
+//
+// T2  IKE_SA_INIT flooding (half-open SA exhaustion): spoofed sources plus
+//     N_bots bots with real addresses (fraction rho of the attack traffic).
+//     Spoofed requests are stopped by the cookie; bots echo the cookie and,
+//     in puzzle mode, must solve a puzzle first.
+// T3  junk IKE_AUTH: bots complete IKE_SA_INIT, then send IKE_AUTH filled
+//     with random bytes. The responder derives SK_* before the integrity
+//     check fails (RFC 8019 s3). Keys are cached (s4.6), so every junk
+//     IKE_AUTH needs a fresh half-open SA, which stays until it expires.
+//     In puzzle mode bots also solve the IKE_AUTH puzzle (s7.2).
+//
+// Defence is switched on when the table holds at least theta half-open SAs
+// (theta = 0: always on), like strongSwan's cookie_threshold.
+//
+// Time unit: seconds. Machine costs come from measure/costs_summary.txt.
+// Known approximation: half-open lifetimes are exponential (mean tau_R).
+
+ctmc
+
+// ---------------------------------------------------------------- experiment constants (set with -const)
+const int    attack;    // 0 = no attack, 2 = T2, 3 = T3
+const int    defense;   // 0 = none, 1 = cookie only, 2 = cookie + puzzle
+const double lam_att;   // attack request rate (per second)
+const double rho;       // T2: share of attack traffic sent by bots (real addresses)
+const int    N_bots;    // number of bots
+const int    H;         // half-open SA table capacity
+const double tau_R;     // half-open SA lifetime (mean), RFC 8019 s4.1
+const int    theta;     // defence threshold on the number of half-open SAs
+const int    k;         // puzzle difficulty
+
+// ---------------------------------------------------------------- fixed constants
+// scenario parameters (not machine costs)
+const int    Q     = 10;                   // responder input queue (attack jobs)
+const double lam_L = 1;                    // legitimate connection attempts per second
+const double RTT   = 0.05;                 // round-trip time
+// MEASURED 2026-11-20, Intel Core Ultra 5 125H, OpenSSL 3.0.16, suite A
+// (X25519 + ECDSA P-256), n=30, see measure/costs_summary.txt
+const double t_PRF     = 1.807093e-06;     // one HMAC-SHA-256 call
+const double t_dh_gen  = 9.301644e-05;     // X25519 key pair
+const double t_dh_auth = 1.621384e-04;     // X25519 shared secret + SK_* derivation (prf+)
+const double t_sig     = 1.810726e-04;     // ECDSA P-256, mean of sign and verify
+const double t_cookie  = 6.148366e-07;     // SHA-256 cookie
+// NOT measured:
+const double t_forge   = 0.001;            // attacker builds one request; deliberately generous
+const double t_floor   = 1e-4;             // numerical floor on a job's service TIME (costs stay exact)
+
+// ---------------------------------------------------------------- derived quantities
+formula h      = ha + hl;
+formula active = defense>0 & h>=theta;
+formula mu_s   = 1 / (4 * pow(2.0, k) * t_PRF);      // puzzles one bot solves per second
+
+// attack requests that create a half-open SA (if there is room)
+formula lam_state = attack=2 ? (active ? (defense=2 ? min(rho*lam_att, N_bots*mu_s) : rho*lam_att) : lam_att)
+                  : (attack=3 ? ((active & defense=2) ? min(lam_att, N_bots*mu_s/2) : lam_att) : 0);
+// spoofed requests answered statelessly (cookie or puzzle)
+formula lam_free  = (attack=2 & active) ? (1-rho)*lam_att : 0;
+formula lam_job   = lam_state + lam_free;
+formula p_state   = lam_state / max(lam_job, 1e-12);
+
+// responder CPU per attack job
+formula c_state = (active ? t_cookie : 0) + ((active & defense=2) ? 4*t_PRF : 0) + t_dh_gen
+                + (attack=3 ? t_dh_auth + ((active & defense=2) ? 4*t_PRF : 0) : 0);
+formula t_work  = p_state*c_state + (1-p_state)*t_cookie;   // mean CPU work per attack job
+formula t_job   = max(t_work, t_floor);                     // service time used by the CTMC
+
+// a legitimate half-open SA completes after one RTT, the initiator's IKE_AUTH
+// work, waiting behind q attack jobs, and the responder's IKE_AUTH work
+formula mu_c = 1 / (RTT + (t_dh_auth + t_sig) + q*t_job + (t_dh_auth + 2*t_sig));
+
+// ---------------------------------------------------------------- responder
+module responder
+
+  ha : [0..H] init 0;
+  hl : [0..H] init 0;
+  q  : [0..Q] init 0;
+
+  // legitimate initiators: admitted only if the table and the queue have room
+  [l_arrive] h<H & q<Q -> lam_L : (hl'=hl+1);
+  [l_done]   hl>0      -> hl*mu_c : (hl'=hl-1);
+  [l_expire] hl>0      -> hl/tau_R : (hl'=hl-1);
+
+  // attack traffic: queue for the CPU, then (maybe) create a half-open SA
+  [a_arrive] attack>=2 & q<Q -> lam_job : (q'=q+1);
+  [a_serve]  attack>=2 & q>0 & lam_free>0
+             -> (1/t_job)*p_state     : (q'=q-1) & (ha'=(h<H ? ha+1 : ha))
+              + (1/t_job)*(1-p_state) : (q'=q-1);
+  [a_serve]  attack>=2 & q>0 & lam_free=0
+             -> 1/t_job : (q'=q-1) & (ha'=(h<H ? ha+1 : ha));
+  [a_expire] ha>0 -> ha/tau_R : (ha'=ha-1);
+
+endmodule
+
+// ---------------------------------------------------------------- labels
+label "resp_full"     = h=H;                  // half-open SA table full
+label "cpu_saturated" = q=Q;                  // input queue full
+label "legit_blocked" = h=H | q=Q;            // a legitimate request arriving now is turned away
+
+// ---------------------------------------------------------------- rewards (state rewards, read with S or C<=T)
+rewards "legit_success"                       // long-run share of legitimate attempts that complete
+  true : hl*mu_c/lam_L;
+endrewards
+
+rewards "resp_cpu"                            // responder CPU work (seconds per second), exact costs
+  attack>=2 & q<Q : lam_job*t_work;           // attack jobs accepted into the queue
+  true : lam_L*(t_dh_gen + t_dh_auth + 2*t_sig);
+endrewards
+
+rewards "att_cpu"                             // attacker CPU, all bots together (seconds per second)
+  attack>=2 : lam_free*t_forge
+            + lam_state*((active & defense=2) ? (attack=3 ? 2 : 1)*4*pow(2.0, k)*t_PRF : t_forge);
+endrewards
+
+rewards "resp_mem"                            // half-open SAs held
+  true : h;
+endrewards

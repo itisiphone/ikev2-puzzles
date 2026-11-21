@@ -1,0 +1,301 @@
+// IKEv2 + RFC 8019 client puzzles -- CTMC model for RQ1 (threat T1)
+// Paper: Quantifying the DoS Resistance of IKEv2 Client Puzzles with
+//        Probabilistic Model Checking
+//
+// M1: message-level model with T1 (forged puzzles) and an Erlang initiator timeout.
+// With attack=0 it serves as the no-attack baseline.
+//
+// T1 (decision D1): the attacker is on the path. It sees every
+// IKE_SA_INIT request the initiator sends and races the responder with
+// a forged response N(COOKIE*), N(PUZZLE, d_f). It cannot drop or delay
+// legitimate messages.
+// Initiator behaviour (decision D2, RFC 7296 s2.21.1): act on the FIRST
+// response that carries a COOKIE; later responses to the same request are
+// stale and discarded.
+// After solving a forged puzzle the initiator resends with the forged
+// cookie; the responder finds the cookie invalid and treats the message
+// as an initial request (RFC 8019 s7.1.4), so the exchange starts over
+// and the attacker can race again.
+//
+// EXTENDED M1 (Discussion, experiments E7-E9).
+// f_type selects what the on-path attacker forges: 0 = COOKIE* + PUZZLE(d_f) (T1),
+// 1 = a whole IKE_SA_INIT response SAr1, KEr with the attacker's own key share.
+// An initiator that takes a forged SAr1 sends IKE_AUTH under keys the responder
+// does not have; the responder drops it and the initiator times out.
+// multi = 1: the initiator treats every response as potentially legitimate and
+// continues each in parallel (RFC 7296 s2.4); a forged SAr1 then fails on its own
+// and costs only a key derivation and a signature, so it is ignored here.
+// With f_type = 0, multi = 0 and w_I = 0 this model equals ikev2_rq1.sm.
+//
+// WAIT WINDOW: with W > 0 an initiator that
+// receives a puzzle does not act at once. It waits for further responses for
+// an exponential time with mean w_I, or until a second response arrives. A
+// response that completes IKE_SA_INIT (SAr1, KEr) is taken at once, also while
+// a puzzle is being solved. If two different puzzles arrived, the initiator
+// solves both, the one that asks for less work first (on a tie, the first to
+// arrive), and sends each solution as soon as it is found.
+// With w_I = 0 this model is identical to ikev2_rq1.sm.
+//
+// Time unit: seconds. Every rate = 1 / mean duration.
+// Machine costs are the measurements in measure/costs_summary.txt.
+// Synchronised commands MULTIPLY rates: the module that owns the timing
+// gives the real rate, every other participant gives 1.
+
+ctmc
+
+// ---------------------------------------------------------------- experiment constants
+// left undefined on purpose; set them with -const
+const int    attack;    // 0 = no attacker, 1 = T1
+const int    defense;   // 0 = none, 1 = cookie only, 2 = cookie + puzzle
+const int    d_f;       // forged difficulty; 0 = "as much effort as it can afford"
+const int    D_max;     // initiator's maximum acceptable difficulty (255 = no limit)
+const double ratio_F;   // attacker reaction speed relative to 1/RTT (E2)
+const int    f_type;    // 0 = forged puzzle (T1), 1 = forged SAr1/KEr
+const int    multi;     // 1 = continue every response in parallel (RFC 7296 s2.4)
+const double w_I;         // mean wait window after a puzzle (s); 0 = act on the first response
+
+// ---------------------------------------------------------------- network
+const double RTT      = 0.05;              // round-trip time (scenario parameter)
+const double mu_net   = 2 / RTT;           // one-way delivery rate
+const double lambda_F = ratio_F / RTT;     // rate at which a forged response lands
+
+// ---------------------------------------------------------------- puzzle (RFC 8019 s7.1.3)
+const int    k     = 18;                   // responder difficulty, RFC 8019 s4.4
+// MEASURED 2026-11-20, Intel Core Ultra 5 125H, OpenSSL 3.0.16, n=30 (measure/costs_summary.txt)
+const double t_PRF = 1.807093e-06;          // one HMAC-SHA-256 call
+// a ZBC of 0 makes the initiator spend its whole budget, modelled as D_max
+// capped at 40 bits: with no D_max limit the work is unbounded; 40 bits already take ~92 days,
+// i.e. never within T, and keep the rate representable for PRISM's symbolic engine
+formula d_eff   = (d_f=0 ? min(D_max, 40) : d_f);
+// each of the 4 key searches is exponential; a puzzle is Erlang-4
+formula mu_key  = 1 / (pow(2.0, k)     * t_PRF);   // real puzzle
+formula mu_fkey = 1 / (pow(2.0, d_eff) * t_PRF);   // forged puzzle
+// wait window: which of two puzzles needs less work (a puzzle above D_max is refused)
+formula prefer_real = k<=D_max & (d_f>D_max | k<d_eff);
+formula prefer_fake = d_f<=D_max & (k>D_max | d_eff<k);
+
+// ---------------------------------------------------------------- processing costs (s)
+// MEASURED 2026-11-20 (suite A: X25519 + ECDSA P-256), n=30, see measure/costs_summary.txt
+const double t_dh_gen  = 9.301644e-05;     // X25519 key pair
+const double t_dh_auth = 1.621384e-04;     // X25519 shared secret + SK_* derivation (prf+)
+const double t_sig     = 1.810726e-04;     // ECDSA P-256, mean of sign and verify
+const double t_cookie  = 6.148366e-07;     // SHA-256 cookie
+// NOT measured:
+const double t_floor   = 1e-3;             // numerical floor on the DURATION of a CPU step (real: 1 us - 0.4 ms).
+                                           // Keeps the CTMC from becoming stiff; adds <= 1 ms per step against a
+                                           // 50 ms RTT and second-scale puzzles. Rewards use the exact costs.
+const double t_parse   = t_floor;          // parse a message, decide (real cost: microseconds)
+const double t_forge   = 0.001;            // attacker builds one forged response; deliberately generous,
+                                           // so attacker cost is over- and the cost asymmetry under-estimated
+
+// ---------------------------------------------------------------- timers
+const double tau_I = 2;                    // initiator retransmission timeout (mean)
+const int    n_I   = 3;                    // Erlang phases of that timeout
+const int    R_max = 3;                    // retries before giving up
+const double tau_R = 2;                    // half-open SA lifetime, RFC 8019 s4.1
+
+// ---------------------------------------------------------------- responder table
+const int H = 5;                           // capacity (only 0..1 used without T2)
+
+// ---------------------------------------------------------------- message codes
+// initiator -> responder (m_IR, in_R)
+//   1 IKE_SA_INIT (also an INIT carrying a forged cookie, see i_send_fake)
+//   2 IKE_SA_INIT + COOKIE    3 IKE_SA_INIT + COOKIE + PS    4 IKE_AUTH
+// responder/attacker -> initiator (in_I)
+//   1 N(COOKIE)   2 N(COOKIE)+N(PUZZLE,k)   3 SAr1,KEr,Nr   4 IKE_AUTH resp
+//   5 forged N(COOKIE*)+N(PUZZLE,d_f), injected by the attacker
+//   6 forged SAr1,KEr, injected by the attacker
+// initiator -> responder, extra: 5 IKE_AUTH under keys of a forged SAr1 (dropped)
+
+// ---------------------------------------------------------------- medium
+module medium
+
+  m_IR : [0..5] init 0;
+  m_RI : [0..4] init 0;
+
+  [i_send_init]   m_IR=0 -> 1 : (m_IR'=1);
+  [i_send_fake]   m_IR=0 -> 1 : (m_IR'=1);
+  [i_send_cookie] m_IR=0 -> 1 : (m_IR'=2);
+  [i_send_ps]     m_IR=0 -> 1 : (m_IR'=3);
+  [i_send_auth]   m_IR=0 -> 1 : (m_IR'=4);
+  [i_send_badauth] m_IR=0 -> 1 : (m_IR'=5);
+
+  [r_send_cookie] m_RI=0 -> 1 : (m_RI'=1);
+  [r_send_puzzle] m_RI=0 -> 1 : (m_RI'=2);
+  [r_send_initok] m_RI=0 -> 1 : (m_RI'=3);
+  [r_send_authok] m_RI=0 -> 1 : (m_RI'=4);
+
+  [deliver_IR] m_IR>0 -> mu_net : (m_IR'=0);
+  [deliver_RI] m_RI>0 -> mu_net : (m_RI'=0);
+
+endmodule
+
+// ---------------------------------------------------------------- attacker (T1)
+// armed = 1: an IKE_SA_INIT request was seen and has not been answered yet
+module attacker
+
+  armed : [0..1] init 0;
+
+  // eavesdrop: every IKE_SA_INIT request arms the attacker (never blocks)
+  [i_send_init]   true -> 1 : (armed'=attack);
+  [i_send_fake]   true -> 1 : (armed'=attack);
+  [i_send_cookie] true -> 1 : (armed'=attack);
+  [i_send_ps]     true -> 1 : (armed'=attack);
+
+  // inject one forged response per observed request
+  [a_inject] armed=1 -> lambda_F : (armed'=0);
+
+endmodule
+
+// ---------------------------------------------------------------- initiator
+// s_I: 0 send INIT      1 wait INIT resp   2 process resp   3 solve puzzle
+//      4 resend          5 compute AUTH     6 wait AUTH resp
+//      7 ESTABLISHED     8 GIVE UP          9 wait window after a puzzle
+module initiator
+
+  s_I  : [0..9] init 0;
+  in_I : [0..6] init 0;       // response taken in
+  bad  : [0..1] init 0;       // keys come from a forged SAr1
+  sol  : [0..3] init 0;       // keys found so far
+  sd   : [0..1] init 0;       // puzzle being solved: 0 real, 1 forged
+  ps   : [0..1] init 0;       // resend carries a PS payload
+  fk   : [0..1] init 0;       // resend carries a forged cookie
+  pend : [0..1] init 0;       // wait window: a second puzzle is still to be solved
+  po   : [0..1] init 0;       // that puzzle: 0 real, 1 forged
+  tph  : [0..n_I-1] init 0;   // Erlang phase of the retransmission timer
+  r_I  : [0..R_max] init 0;   // timeouts so far
+
+  // send IKE_SA_INIT (includes DH key generation)
+  [i_send_init] s_I=0 -> 1/max(t_dh_gen, t_floor) : (s_I'=1);
+
+  // real responses: accept while waiting, discard otherwise
+  [deliver_RI] s_I=1 -> 1 : (s_I'=((w_I>0 & m_RI=2) ? 9 : 2)) & (in_I'=m_RI) & (tph'=0);
+  [deliver_RI] s_I=6 & m_RI=4  -> 1 : (s_I'=7) & (tph'=0);
+  [deliver_RI] s_I=6 & m_RI!=4 -> 1 : true;
+  [deliver_RI] s_I!=1 & s_I!=6 & s_I!=9 & !(s_I=3 & m_RI=3 & w_I>0) -> 1 : true;
+  // wait window: a second response ends the wait; keep the cheaper puzzle
+  [deliver_RI] s_I=9 & m_RI=2 & in_I=5  -> 1 : (s_I'=2) & (in_I'=(prefer_real ? 2 : 5))
+                 & (pend'=(prefer_real ? (d_f<=D_max ? 1 : 0) : (k<=D_max ? 1 : 0))) & (po'=(prefer_real ? 1 : 0));
+  [deliver_RI] s_I=9 & m_RI=2 & in_I!=5 -> 1 : (s_I'=2);
+  [deliver_RI] s_I=9 & m_RI=3 -> 1 : (s_I'=2) & (in_I'=3) & (pend'=0);
+  // ... and while solving: the exchange has completed, stop
+  [deliver_RI] s_I=3 & m_RI=3 & w_I>0 -> 1 : (s_I'=2) & (in_I'=3) & (sol'=0) & (pend'=0);
+  // a genuine cookie-only response needs no work: echo it first, then solve the forged puzzle
+  [deliver_RI] s_I=9 & m_RI=1 & in_I=5  -> 1 : (s_I'=2) & (in_I'=1) & (pend'=(d_f<=D_max ? 1 : 0)) & (po'=1);
+  [deliver_RI] s_I=9 & m_RI=1 & in_I!=5 -> 1 : (s_I'=2);
+  [deliver_RI] s_I=9 & m_RI=4 -> 1 : true;
+
+  // forged responses: same rule, the first response wins
+  [a_inject] f_type=0 & s_I=1  -> 1 : (s_I'=(w_I>0 ? 9 : 2)) & (in_I'=5) & (tph'=0);
+  [a_inject] f_type=0 & s_I=9 & in_I=2  -> 1 : (s_I'=2) & (in_I'=(prefer_fake ? 5 : 2))
+               & (pend'=(prefer_fake ? (k<=D_max ? 1 : 0) : (d_f<=D_max ? 1 : 0))) & (po'=(prefer_fake ? 0 : 1));
+  [a_inject] f_type=0 & s_I=9 & in_I!=2 -> 1 : (s_I'=2);
+  [a_inject] f_type=0 & s_I!=1 & s_I!=9 -> 1 : true;
+  // forged SAr1: taken like a genuine one (at once, also during the window or a solve) ...
+  [a_inject] f_type=1 & multi=0 & s_I=1 -> 1 : (s_I'=2) & (in_I'=6) & (tph'=0);
+  [a_inject] f_type=1 & multi=0 & s_I=9 -> 1 : (s_I'=2) & (in_I'=6) & (pend'=0);
+  [a_inject] f_type=1 & multi=0 & s_I=3 & w_I>0 -> 1 : (s_I'=2) & (in_I'=6) & (sol'=0) & (pend'=0);
+  [a_inject] f_type=1 & multi=0 & !(s_I=1 | s_I=9 | (s_I=3 & w_I>0)) -> 1 : true;
+  // ... or, with multi = 1, continued in parallel, where it fails without effect
+  [a_inject] f_type=1 & multi=1 -> 1 : true;
+  [i_wait]   s_I=9  -> 1/max(w_I, 1e-9) : (s_I'=2);
+
+  // retransmission timer, Erlang-n_I with mean tau_I
+  [i_tick]    (s_I=1 | s_I=6) & tph<n_I-1               -> n_I/tau_I : (tph'=tph+1);
+  [i_timeout] (s_I=1 | s_I=6) & tph=n_I-1 & r_I<R_max   -> n_I/tau_I : (s_I'=0) & (r_I'=r_I+1) & (tph'=0) & (bad'=0);
+  [i_giveup]  (s_I=1 | s_I=6) & tph=n_I-1 & r_I=R_max   -> n_I/tau_I : (s_I'=8) & (tph'=0);
+
+  // process the response (RFC 8019 s7.1.2)
+  [i_parse] s_I=2 & in_I=1                -> 1/t_parse : (s_I'=4) & (ps'=0) & (fk'=0);
+  [i_parse] s_I=2 & in_I=2 & k<=D_max     -> 1/t_parse : (s_I'=3) & (sol'=0) & (sd'=0) & (ps'=1) & (fk'=0);
+  [i_parse] s_I=2 & in_I=2 & k>D_max      -> 1/t_parse : (s_I'=4) & (ps'=0) & (fk'=0);
+  [i_parse] s_I=2 & in_I=3                -> 1/t_parse : (s_I'=5) & (bad'=0);
+  [i_parse] s_I=2 & in_I=6                -> 1/t_parse : (s_I'=5) & (bad'=1);
+  [i_parse] s_I=2 & (in_I=4 | in_I=0)     -> 1/t_parse : (s_I'=1);            // stale / filler
+  [i_parse] s_I=2 & in_I=5 & d_f<=D_max   -> 1/t_parse : (s_I'=3) & (sol'=0) & (sd'=1) & (ps'=1) & (fk'=1);
+  [i_parse] s_I=2 & in_I=5 & d_f>D_max    -> 1/t_parse : (s_I'=4) & (ps'=0) & (fk'=1);
+
+  // solve a puzzle: 4 exponential phases
+  [i_solve] s_I=3 & sol<3 -> (sd=0 ? mu_key : mu_fkey) : (sol'=sol+1);
+  [i_solve] s_I=3 & sol=3 -> (sd=0 ? mu_key : mu_fkey) : (s_I'=4) & (sol'=0);
+
+  // resend IKE_SA_INIT
+  [i_send_cookie] s_I=4 & fk=0 & ps=0 -> 1/t_parse : (s_I'=(pend=1 ? 3 : 1)) & (pend'=0) & (sol'=0)
+                  & (sd'=(pend=1 ? po : sd)) & (ps'=(pend=1 ? 1 : ps)) & (fk'=(pend=1 ? po : fk));
+  [i_send_ps]     s_I=4 & fk=0 & ps=1 -> 1/t_parse : (s_I'=(pend=1 ? 3 : 1)) & (pend'=0) & (sol'=0)
+                  & (sd'=(pend=1 ? po : sd)) & (ps'=(pend=1 ? 1 : ps)) & (fk'=(pend=1 ? po : fk));
+  [i_send_fake]   s_I=4 & fk=1        -> 1/t_parse : (s_I'=(pend=1 ? 3 : 1)) & (pend'=0) & (sol'=0)
+                  & (sd'=(pend=1 ? po : sd)) & (ps'=(pend=1 ? 1 : ps)) & (fk'=(pend=1 ? po : 0));
+
+  // IKE_AUTH: DH shared secret, key derivation, signature
+  [i_send_auth]    s_I=5 & bad=0 -> 1/max(t_dh_auth + t_sig, t_floor) : (s_I'=6);
+  [i_send_badauth] s_I=5 & bad=1 -> 1/max(t_dh_auth + t_sig, t_floor) : (s_I'=6);
+
+endmodule
+
+// ---------------------------------------------------------------- responder
+module responder
+
+  in_R : [0..5] init 0;
+  rs   : [0..2] init 0;       // legit session: 0 none, 1 half-open, 2 done
+  h    : [0..H] init 0;       // half-open SAs in the table
+
+  [deliver_IR] in_R=0 -> 1 : (in_R'=m_IR);
+
+  [r_send_initok] (in_R=1 & defense=0 | in_R=2 & defense<=1) & (rs=1 | h<H)
+                  -> 1/max(t_cookie + t_dh_gen, t_floor)
+                  : (in_R'=0) & (rs'=1) & (h'=(rs=1 ? h : h+1));
+  [r_send_initok] in_R=3 & (rs=1 | h<H)
+                  -> 1/max(t_cookie + 4*t_PRF + t_dh_gen, t_floor)
+                  : (in_R'=0) & (rs'=1) & (h'=(rs=1 ? h : h+1));
+
+  [r_drop_full] (in_R=1 & defense=0 | in_R=2 & defense<=1 | in_R=3) & rs!=1 & h=H
+                -> 1/t_parse : (in_R'=0);
+
+  [r_send_cookie] in_R=1 & defense=1              -> 1/max(t_cookie, t_parse) : (in_R'=0);
+  [r_send_puzzle] (in_R=1 | in_R=2) & defense=2   -> 1/max(t_cookie, t_parse) : (in_R'=0);
+
+  [r_send_authok] in_R=4 & rs=1 & h>0 -> 1/max(t_dh_auth + 2*t_sig, t_floor)
+                  : (in_R'=0) & (rs'=2) & (h'=h-1);
+  [r_drop_auth]   (in_R=4 & !(rs=1 & h>0)) | in_R=5 -> 1/t_parse : (in_R'=0);
+
+  [r_expire] rs=1 & h>0 -> 1/tau_R : (rs'=0) & (h'=h-1);
+
+endmodule
+
+// ---------------------------------------------------------------- labels
+label "established"    = s_I=7;
+label "init_unavail"   = s_I=8;               // gave up after R_max timeouts
+label "done"           = s_I=7 | s_I=8;
+label "solving_forged" = s_I=3 & sd=1;
+label "resp_full"      = h=H;
+
+// ---------------------------------------------------------------- rewards
+rewards "init_cpu"
+  [i_send_init] true : t_dh_gen;
+  [i_solve]     sd=0 : pow(2.0, k)     * t_PRF;
+  [i_solve]     sd=1 : pow(2.0, d_eff) * t_PRF;
+  [i_send_auth] true : t_dh_auth + t_sig;
+  [i_send_badauth] true : t_dh_auth + t_sig;
+  [a_inject] f_type=1 & multi=1 : t_dh_auth + t_sig;   // the parallel exchange that fails
+endrewards
+
+rewards "att_cpu"
+  [a_inject] true : t_forge;
+endrewards
+
+rewards "resp_cpu"
+  [r_send_initok] in_R!=3 : t_cookie + t_dh_gen;
+  [r_send_initok] in_R=3  : t_cookie + 4*t_PRF + t_dh_gen;
+  [r_send_cookie] true    : t_cookie;
+  [r_send_puzzle] true    : t_cookie;
+  [r_send_authok] true    : t_dh_auth + 2*t_sig;
+endrewards
+
+rewards "forged_solved"
+  [i_solve] sd=1 & sol=3 : 1;                 // forged puzzles fully solved
+endrewards
+
+rewards "time"
+  true : 1;
+endrewards
