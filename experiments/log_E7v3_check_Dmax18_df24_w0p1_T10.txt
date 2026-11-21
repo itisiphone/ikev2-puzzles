@@ -1,0 +1,91 @@
+PRISM
+=====
+
+Version: 4.10.1
+Date: Sat Nov 21 14:44:17 2026
+Memory limits: cudd=1g, java(heap)=1.5g
+Command line: prism ikev2_rq1_wait.sm experiments/ikev2_rq1_wait.props -const 'attack=1,defense=2,f_type=0,multi=0,d_f=24,D_max=18,ratio_F=2,w_I=0.1,T=10' -explicit -exportresults 'experiments/E7v3_check_Dmax18_df24_w0p1_T10.csv:csv'
+
+Parsing PRISM model file "ikev2_rq1_wait.sm"...
+
+Type:        CTMC
+Modules:     medium attacker initiator responder
+Actions:     [i_send_init] [i_send_fake] [i_send_cookie] [i_send_ps] [i_send_auth] [i_send_badauth] [r_send_cookie] [r_send_puzzle] [r_send_initok] [r_send_authok] [deliver_IR] [deliver_RI] [a_inject] [i_wait] [i_tick] [i_timeout] [i_giveup] [i_parse] [i_solve] [r_drop_full] [r_drop_auth] [r_expire]
+Variables:   m_IR m_RI armed s_I in_I bad sol sd ps fk pend po tph r_I in_R rs h
+Labels:      "established" "init_unavail" "done" "solving_forged" "resp_full"
+Rewards:     "init_cpu" "att_cpu" "resp_cpu" "forged_solved" "time"
+
+Parsing properties file "experiments/ikev2_rq1_wait.props"...
+
+1 property:
+(1) P=? [ F<=T "established" ]
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=18,ratio_F=2,f_type=0,multi=0,w_I=0.1
+Property constants: T=10
+
+Building model (engine:explicit)...
+Model constants: attack=1,defense=2,d_f=24,D_max=18,ratio_F=2,f_type=0,multi=0,w_I=0.1
+
+Computing reachable states... 19900 states
+Reachable states exploration and model construction done in 0.261 secs.
+Sorting reachable states list...
+
+Time for model construction: 0.343 seconds.
+
+Warning: Deadlocks detected and fixed in 37 states
+
+Type:        CTMC
+States:      19900 (1 initial)
+Transitions: 56009
+
+Starting backwards transient probability computation...
+
+Uniformisation: q.t = 2121.6 x 10.0 = 21216.0
+Fox-Glynn (1.25E-7): left = 20194, right = 22454
+Backwards transient probability computation took 22455 iters and 97.7 seconds.
+
+Value in the initial state: 0.9986500090628594
+
+Time for model checking: 97.716 seconds.
+
+Result: 0.9986500090628594
+
+Exporting results as list (CSV) to file "experiments/E7v3_check_Dmax18_df24_w0p1_T10.csv"...
+2026-11-21T14:45:56.476109Z main ERROR Could not determine local host name java.net.UnknownHostException: claude: claude: Temporary failure in name resolution
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1670)
+	at org.apache.logging.log4j.core.util.NetUtils.getHostname(NetUtils.java:71)
+	at org.apache.logging.log4j.core.util.NetUtils.getLocalHostname(NetUtils.java:56)
+	at org.apache.logging.log4j.core.LoggerContext.lambda$setConfiguration$0(LoggerContext.java:632)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1705)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:632)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:727)
+	at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:749)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:261)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:153)
+	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:46)
+	at org.apache.logging.log4j.LogManager.getContext(LogManager.java:138)
+	at org.apache.logging.log4j.LogManager.getLogger(LogManager.java:555)
+	at edu.jas.kern.ComputerThreads.<clinit>(ComputerThreads.java:32)
+	at param.ParamModelChecker.closeDown(ParamModelChecker.java:1249)
+	at prism.Prism.closeDown(Prism.java:4289)
+	at prism.PrismCL.closeDown(PrismCL.java:1004)
+	at prism.PrismCL.run(PrismCL.java:543)
+	at prism.PrismCL.go(PrismCL.java:227)
+	at prism.PrismCL.main(PrismCL.java:3008)
+Caused by: java.net.UnknownHostException: claude: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.InetAddress$PlatformNameService.lookupAllHostAddr(InetAddress.java:930)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1543)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:848)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1533)
+	at java.base/java.net.InetAddress.getLocalHost(InetAddress.java:1665)
+	... 19 more
+
+
+---------------------------------------------------------------------
+
+Note: There was 1 warning during computation.
+

@@ -1,0 +1,180 @@
+PRISM
+=====
+
+Version: 4.10.1
+Date: Sat Nov 21 10:30:33 2026
+Memory limits: cudd=1g, java(heap)=7.9g
+Command line: prism ikev2_rq1_wait.sm 'experiments\deadlock.props' -const 'attack=1,defense=2,d_f=0:8:24,D_max=255,ratio_F=2,w_I=0.1' -exportresults 'experiments\E0_deadlock_wait.csv:csv'
+
+Parsing PRISM model file "ikev2_rq1_wait.sm"...
+
+Type:        CTMC
+Modules:     medium attacker initiator responder
+Actions:     [i_send_init] [i_send_fake] [i_send_cookie] [i_send_ps] [i_send_auth] [r_send_cookie] [r_send_puzzle] [r_send_initok] [r_send_authok] [deliver_IR] [deliver_RI] [a_inject] [i_wait] [i_tick] [i_timeout] [i_giveup] [i_parse] [i_solve] [r_drop_full] [r_drop_auth] [r_expire]
+Variables:   m_IR m_RI armed s_I in_I sol sd ps fk pend po tph r_I in_R rs h
+Labels:      "established" "init_unavail" "done" "solving_forged" "resp_full"
+Rewards:     "init_cpu" "att_cpu" "resp_cpu" "forged_solved" "time"
+
+Parsing properties file "experiments\deadlock.props"...
+
+1 property:
+(1) filter(forall, "deadlock"=>"done")
+
+---------------------------------------------------------------------
+
+Model checking: filter(forall, "deadlock"=>"done")
+Model constants: attack=1,defense=2,d_f=0,D_max=255,ratio_F=2,w_I=0.1
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=0,D_max=255,ratio_F=2,w_I=0.1
+
+Warning: Guard for command 21 of module "initiator" is never satisfied.
+
+Warning: Guard for command 25 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 79 iterations in 0.47 seconds (average 0.005937, setup 0.00)
+
+Time for model construction: 0.599 seconds.
+
+Warning: Deadlocks detected and fixed in 52 states
+
+Type:        CTMC
+States:      30169 (1 initial)
+Transitions: 82792
+
+Rate matrix: 27471 nodes (9 terminal), 82792 minterms, vars: 33r/33c
+
+States satisfying filter true: 30169
+
+Property satisfied in 30169 of all 30169 states.
+
+Time for model checking: 0.0 seconds.
+
+Result: true
+
+---------------------------------------------------------------------
+
+Model checking: filter(forall, "deadlock"=>"done")
+Model constants: attack=1,defense=2,d_f=8,D_max=255,ratio_F=2,w_I=0.1
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=8,D_max=255,ratio_F=2,w_I=0.1
+
+Warning: Guard for command 21 of module "initiator" is never satisfied.
+
+Warning: Guard for command 25 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 68 iterations in 0.39 seconds (average 0.005750, setup 0.00)
+
+Time for model construction: 0.447 seconds.
+
+Warning: Deadlocks detected and fixed in 27 states
+
+Type:        CTMC
+States:      17102 (1 initial)
+Transitions: 46691
+
+Rate matrix: 24607 nodes (9 terminal), 46691 minterms, vars: 33r/33c
+
+States satisfying filter true: 17102
+
+Property satisfied in 17102 of all 17102 states.
+
+Time for model checking: 0.0 seconds.
+
+Result: true
+
+---------------------------------------------------------------------
+
+Model checking: filter(forall, "deadlock"=>"done")
+Model constants: attack=1,defense=2,d_f=16,D_max=255,ratio_F=2,w_I=0.1
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=16,D_max=255,ratio_F=2,w_I=0.1
+
+Warning: Guard for command 21 of module "initiator" is never satisfied.
+
+Warning: Guard for command 25 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 68 iterations in 0.38 seconds (average 0.005515, setup 0.00)
+
+Time for model construction: 0.449 seconds.
+
+Warning: Deadlocks detected and fixed in 27 states
+
+Type:        CTMC
+States:      17102 (1 initial)
+Transitions: 46691
+
+Rate matrix: 24607 nodes (9 terminal), 46691 minterms, vars: 33r/33c
+
+States satisfying filter true: 17102
+
+Property satisfied in 17102 of all 17102 states.
+
+Time for model checking: 0.0 seconds.
+
+Result: true
+
+---------------------------------------------------------------------
+
+Model checking: filter(forall, "deadlock"=>"done")
+Model constants: attack=1,defense=2,d_f=24,D_max=255,ratio_F=2,w_I=0.1
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=24,D_max=255,ratio_F=2,w_I=0.1
+
+Warning: Guard for command 21 of module "initiator" is never satisfied.
+
+Warning: Guard for command 25 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 79 iterations in 0.56 seconds (average 0.007127, setup 0.00)
+
+Time for model construction: 0.685 seconds.
+
+Warning: Deadlocks detected and fixed in 52 states
+
+Type:        CTMC
+States:      30169 (1 initial)
+Transitions: 82792
+
+Rate matrix: 27471 nodes (9 terminal), 82792 minterms, vars: 33r/33c
+
+States satisfying filter true: 30169
+
+Property satisfied in 30169 of all 30169 states.
+
+Time for model checking: 0.001 seconds.
+
+Result: true
+
+Exporting results as list (CSV) to file "experiments\E0_deadlock_wait.csv"...
+
+---------------------------------------------------------------------
+
+Note: There were 20 warnings during computation.
+

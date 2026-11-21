@@ -1,0 +1,5776 @@
+PRISM
+=====
+
+Version: 4.10.1
+Date: Fri Nov 20 18:05:59 2026
+Memory limits: cudd=1g, java(heap)=7.9g
+Command line: prism ikev2_rq1.sm 'experiments\ikev2_rq1_exp.props' -const 'attack=1,defense=2,d_f=24:4:28,D_max=24,ratio_F=0.5:0.5:5,T=10:50:60' -exportresults 'experiments\E2_ratio.csv:csv'
+
+Parsing PRISM model file "ikev2_rq1.sm"...
+
+Type:        CTMC
+Modules:     medium attacker initiator responder
+Actions:     [i_send_init] [i_send_fake] [i_send_cookie] [i_send_ps] [i_send_auth] [r_send_cookie] [r_send_puzzle] [r_send_initok] [r_send_authok] [deliver_IR] [deliver_RI] [a_inject] [i_tick] [i_timeout] [i_giveup] [i_parse] [i_solve] [r_drop_full] [r_drop_auth] [r_expire]
+Variables:   m_IR m_RI armed s_I in_I sol sd ps fk tph r_I in_R rs h
+Labels:      "established" "init_unavail" "done" "solving_forged" "resp_full"
+Rewards:     "init_cpu" "att_cpu" "resp_cpu" "forged_solved" "time"
+
+Parsing properties file "experiments\ikev2_rq1_exp.props"...
+
+4 properties:
+(1) P=? [ F<=T "established" ]
+(2) P=? [ F<=T "solving_forged" ]
+(3) R{"init_cpu"}=? [ C<=T ]
+(4) R{"att_cpu"}=? [ C<=T ]
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=0.5
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=0.5
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 17 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 65 iterations in 0.17 seconds (average 0.002646, setup 0.00)
+
+Time for model construction: 0.225 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      10431 (1 initial)
+Transitions: 28872
+
+Rate matrix: 18209 nodes (9 terminal), 28872 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2091.000000 x 10.000000 = 20910.000000
+Fox-Glynn: left = 19895, right = 22139
+
+Starting iterations...
+
+Iterative method: 22139 iterations in 1.14 seconds (average 0.000048, setup 0.08)
+
+Value in the initial state: 0.39568417352345947
+
+Time for model checking: 1.186 seconds.
+
+Result: 0.39568417352345947
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=0.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2091.000000 x 60.000000 = 125460.000000
+Fox-Glynn: left = 122978, right = 128468
+
+Starting iterations...
+Iteration 50042 (of 128468): max relative diff=0.000075, 5.02 sec so far
+Iteration 84965 (of 128468): max relative diff=0.000038, 10.03 sec so far
+Iteration 114973 (of 128468): max relative diff=0.000024, 15.05 sec so far
+
+Iterative method: 128468 iterations in 17.14 seconds (average 0.000133, setup 0.08)
+
+Value in the initial state: 0.42519390080723996
+
+Time for model checking: 18.168 seconds.
+
+Result: 0.42519390080723996
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=0.5
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2091.000000 x 10.000000 = 20910.000000
+Fox-Glynn: left = 19895, right = 22139
+
+Starting iterations...
+
+Iterative method: 22139 iterations in 3.41 seconds (average 0.000146, setup 0.17)
+
+Value in the initial state: 0.6041652846399587
+
+Time for model checking: 3.463 seconds.
+
+Result: 0.6041652846399587
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=0.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2091.000000 x 60.000000 = 125460.000000
+Fox-Glynn: left = 122978, right = 128468
+
+Starting iterations...
+
+Steady state detected at iteration 24684
+
+Iterative method: 24684 iterations in 4.06 seconds (average 0.000157, setup 0.19)
+
+Value in the initial state: 0.6042223005585243
+
+Time for model checking: 4.201 seconds.
+
+Result: 0.6042223005585243
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=0.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2091.000000 x 10.000000 = 20910.000000
+Fox-Glynn: left = 19895, right = 22139
+
+Starting iterations...
+Iteration 17966 (of 22139): max relative diff=0.019847, 5.01 sec so far
+
+Iterative method: 22139 iterations in 6.33 seconds (average 0.000279, setup 0.16)
+
+Value in the initial state: 6.75862396527507
+
+Time for model checking: 6.617 seconds.
+
+Result: 6.75862396527507
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=0.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2091.000000 x 60.000000 = 125460.000000
+Fox-Glynn: left = 122978, right = 128468
+
+Starting iterations...
+Iteration 16978 (of 128468): max relative diff=0.019847, 5.02 sec so far
+Iteration 35894 (of 128468): max relative diff=0.019847, 10.03 sec so far
+Iteration 47851 (of 128468): max relative diff=0.000004, 15.05 sec so far
+Iteration 61072 (of 128468): max relative diff=0.000003, 20.06 sec so far
+Iteration 73656 (of 128468): max relative diff=0.000003, 25.08 sec so far
+Iteration 85818 (of 128468): max relative diff=0.000003, 30.09 sec so far
+Iteration 97307 (of 128468): max relative diff=0.000003, 35.11 sec so far
+Iteration 107792 (of 128468): max relative diff=0.000003, 40.12 sec so far
+Iteration 118555 (of 128468): max relative diff=0.000003, 45.14 sec so far
+
+Iterative method: 128468 iterations in 49.20 seconds (average 0.000382, setup 0.17)
+
+Value in the initial state: 36.52744763556823
+
+Time for model checking: 51.206 seconds.
+
+Result: 36.52744763556823
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=0.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2091.000000 x 10.000000 = 20910.000000
+Fox-Glynn: left = 19895, right = 22139
+
+Starting iterations...
+
+Iterative method: 22139 iterations in 3.55 seconds (average 0.000157, setup 0.06)
+
+Value in the initial state: 0.0016487989704427016
+
+Time for model checking: 3.75 seconds.
+
+Result: 0.0016487989704427016
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=0.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2091.000000 x 60.000000 = 125460.000000
+Fox-Glynn: left = 122978, right = 128468
+
+Starting iterations...
+Iteration 31000 (of 128468): max relative diff=0.004782, 5.02 sec so far
+Iteration 59447 (of 128468): max relative diff=0.004782, 10.03 sec so far
+Iteration 86147 (of 128468): max relative diff=0.004782, 15.05 sec so far
+Iteration 115585 (of 128468): max relative diff=0.004782, 20.06 sec so far
+
+Iterative method: 128468 iterations in 22.61 seconds (average 0.000175, setup 0.14)
+
+Value in the initial state: 0.0017781150544702894
+
+Time for model checking: 23.792 seconds.
+
+Result: 0.0017781150544702894
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 17 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 65 iterations in 0.39 seconds (average 0.006015, setup 0.00)
+
+Time for model construction: 0.473 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      10431 (1 initial)
+Transitions: 28872
+
+Rate matrix: 18209 nodes (9 terminal), 28872 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2101.200000 x 10.000000 = 21012.000000
+Fox-Glynn: left = 19995, right = 22244
+
+Starting iterations...
+
+Iterative method: 22244 iterations in 3.67 seconds (average 0.000160, setup 0.11)
+
+Value in the initial state: 0.18643977930061323
+
+Time for model checking: 3.783 seconds.
+
+Result: 0.18643977930061323
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2101.200000 x 60.000000 = 126072.000000
+Fox-Glynn: left = 123583, right = 129086
+
+Starting iterations...
+Iteration 28869 (of 129086): max relative diff=0.000148, 5.01 sec so far
+Iteration 57994 (of 129086): max relative diff=0.000062, 10.03 sec so far
+Iteration 88258 (of 129086): max relative diff=0.000036, 15.05 sec so far
+Iteration 121478 (of 129086): max relative diff=0.000023, 20.06 sec so far
+
+Iterative method: 129086 iterations in 21.58 seconds (average 0.000166, setup 0.19)
+
+Value in the initial state: 0.20532296737825162
+
+Time for model checking: 22.388 seconds.
+
+Result: 0.20532296737825162
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2101.200000 x 10.000000 = 21012.000000
+Fox-Glynn: left = 19995, right = 22244
+
+Starting iterations...
+
+Iterative method: 22244 iterations in 3.45 seconds (average 0.000148, setup 0.16)
+
+Value in the initial state: 0.8135303452037663
+
+Time for model checking: 3.638 seconds.
+
+Result: 0.8135303452037663
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2101.200000 x 60.000000 = 126072.000000
+Fox-Glynn: left = 123583, right = 129086
+
+Starting iterations...
+
+Steady state detected at iteration 23316
+
+Iterative method: 23316 iterations in 3.20 seconds (average 0.000130, setup 0.17)
+
+Value in the initial state: 0.8135500089095051
+
+Time for model checking: 3.384 seconds.
+
+Result: 0.8135500089095051
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2101.200000 x 10.000000 = 21012.000000
+Fox-Glynn: left = 19995, right = 22244
+
+Starting iterations...
+Iteration 18789 (of 22244): max relative diff=0.019751, 5.02 sec so far
+
+Iterative method: 22244 iterations in 6.11 seconds (average 0.000266, setup 0.19)
+
+Value in the initial state: 8.453671505739685
+
+Time for model checking: 6.425 seconds.
+
+Result: 8.453671505739685
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2101.200000 x 60.000000 = 126072.000000
+Fox-Glynn: left = 123583, right = 129086
+
+Starting iterations...
+Iteration 23594 (of 129086): max relative diff=0.019751, 5.02 sec so far
+Iteration 42016 (of 129086): max relative diff=0.000002, 10.03 sec so far
+Iteration 53936 (of 129086): max relative diff=0.000002, 15.05 sec so far
+Iteration 66028 (of 129086): max relative diff=0.000001, 20.06 sec so far
+Iteration 76735 (of 129086): max relative diff=0.000001, 25.08 sec so far
+Iteration 88487 (of 129086): max relative diff=0.000001, 30.09 sec so far
+Iteration 100103 (of 129086): max relative diff=0.000001, 35.11 sec so far
+Iteration 112806 (of 129086): max relative diff=0.000001, 40.12 sec so far
+Iteration 124865 (of 129086): max relative diff=0.000001, 45.14 sec so far
+
+Iterative method: 129086 iterations in 46.94 seconds (average 0.000362, setup 0.17)
+
+Value in the initial state: 48.84488571653207
+
+Time for model checking: 49.277 seconds.
+
+Result: 48.84488571653207
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2101.200000 x 10.000000 = 21012.000000
+Fox-Glynn: left = 19995, right = 22244
+
+Starting iterations...
+
+Iterative method: 22244 iterations in 3.89 seconds (average 0.000167, setup 0.17)
+
+Value in the initial state: 0.001442007263215177
+
+Time for model checking: 4.081 seconds.
+
+Result: 0.001442007263215177
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2101.200000 x 60.000000 = 126072.000000
+Fox-Glynn: left = 123583, right = 129086
+
+Starting iterations...
+Iteration 27141 (of 129086): max relative diff=0.009518, 5.01 sec so far
+Iteration 53034 (of 129086): max relative diff=0.009518, 10.03 sec so far
+Iteration 74958 (of 129086): max relative diff=0.009518, 15.05 sec so far
+Iteration 81402 (of 129086): max relative diff=0.000025, 20.06 sec so far
+Iteration 86725 (of 129086): max relative diff=0.000022, 25.08 sec so far
+Iteration 92211 (of 129086): max relative diff=0.000020, 30.09 sec so far
+Iteration 97360 (of 129086): max relative diff=0.000018, 35.11 sec so far
+Iteration 102752 (of 129086): max relative diff=0.000016, 40.12 sec so far
+Iteration 108230 (of 129086): max relative diff=0.000014, 45.14 sec so far
+Iteration 113429 (of 129086): max relative diff=0.000013, 50.16 sec so far
+Iteration 119012 (of 129086): max relative diff=0.000011, 55.17 sec so far
+Iteration 124222 (of 129086): max relative diff=0.000010, 60.19 sec so far
+
+Iterative method: 129086 iterations in 64.20 seconds (average 0.000496, setup 0.12)
+
+Value in the initial state: 0.001597128727879799
+
+Time for model checking: 67.283 seconds.
+
+Result: 0.001597128727879799
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1.5
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1.5
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 17 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 65 iterations in 0.36 seconds (average 0.005538, setup 0.00)
+
+Time for model construction: 0.442 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      10431 (1 initial)
+Transitions: 28872
+
+Rate matrix: 18209 nodes (9 terminal), 28872 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2111.400000 x 10.000000 = 21114.000000
+Fox-Glynn: left = 20094, right = 22349
+
+Starting iterations...
+
+Iterative method: 22349 iterations in 3.67 seconds (average 0.000157, setup 0.17)
+
+Value in the initial state: 0.09860773249268721
+
+Time for model checking: 3.795 seconds.
+
+Result: 0.09860773249268721
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2111.400000 x 60.000000 = 126684.000000
+Fox-Glynn: left = 124190, right = 129706
+
+Starting iterations...
+Iteration 29275 (of 129706): max relative diff=0.000145, 5.02 sec so far
+Iteration 62071 (of 129706): max relative diff=0.000057, 10.03 sec so far
+Iteration 98933 (of 129706): max relative diff=0.000031, 15.05 sec so far
+
+Iterative method: 129706 iterations in 19.56 seconds (average 0.000149, setup 0.17)
+
+Value in the initial state: 0.1097474698624895
+
+Time for model checking: 20.608 seconds.
+
+Result: 0.1097474698624895
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1.5
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2111.400000 x 10.000000 = 21114.000000
+Fox-Glynn: left = 20094, right = 22349
+
+Starting iterations...
+
+Iterative method: 22349 iterations in 3.45 seconds (average 0.000149, setup 0.12)
+
+Value in the initial state: 0.9013868090249659
+
+Time for model checking: 3.618 seconds.
+
+Result: 0.9013868090249659
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2111.400000 x 60.000000 = 126684.000000
+Fox-Glynn: left = 124190, right = 129706
+
+Starting iterations...
+
+Steady state detected at iteration 22594
+
+Iterative method: 22594 iterations in 1.12 seconds (average 0.000044, setup 0.12)
+
+Value in the initial state: 0.9013934329926823
+
+Time for model checking: 1.146 seconds.
+
+Result: 0.9013934329926823
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2111.400000 x 10.000000 = 21114.000000
+Fox-Glynn: left = 20094, right = 22349
+
+Starting iterations...
+Iteration 20141 (of 22349): max relative diff=0.019655, 5.01 sec so far
+
+Iterative method: 22349 iterations in 5.52 seconds (average 0.000243, setup 0.08)
+
+Value in the initial state: 9.17107922547884
+
+Time for model checking: 5.814 seconds.
+
+Result: 9.17107922547884
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2111.400000 x 60.000000 = 126684.000000
+Fox-Glynn: left = 124190, right = 129706
+
+Starting iterations...
+Iteration 19199 (of 129706): max relative diff=0.019655, 5.02 sec so far
+Iteration 37097 (of 129706): max relative diff=0.020833, 10.03 sec so far
+Iteration 47723 (of 129706): max relative diff=0.000001, 15.05 sec so far
+Iteration 59185 (of 129706): max relative diff=0.000001, 20.06 sec so far
+Iteration 69641 (of 129706): max relative diff=0.000001, 25.08 sec so far
+Iteration 81522 (of 129706): max relative diff=0.000001, 30.09 sec so far
+Iteration 92559 (of 129706): max relative diff=0.000001, 35.11 sec so far
+Iteration 106483 (of 129706): max relative diff=0.000001, 40.12 sec so far
+Iteration 118264 (of 129706): max relative diff=0.000001, 45.14 sec so far
+
+Iterative method: 129706 iterations in 48.45 seconds (average 0.000372, setup 0.17)
+
+Value in the initial state: 54.07014488952762
+
+Time for model checking: 50.513 seconds.
+
+Result: 54.07014488952762
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2111.400000 x 10.000000 = 21114.000000
+Fox-Glynn: left = 20094, right = 22349
+
+Starting iterations...
+
+Iterative method: 22349 iterations in 2.91 seconds (average 0.000127, setup 0.06)
+
+Value in the initial state: 0.0013201205152933043
+
+Time for model checking: 3.162 seconds.
+
+Result: 0.0013201205152933043
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=1.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2111.400000 x 60.000000 = 126684.000000
+Fox-Glynn: left = 124190, right = 129706
+
+Starting iterations...
+Iteration 29540 (of 129706): max relative diff=0.014209, 5.02 sec so far
+Iteration 50660 (of 129706): max relative diff=0.014209, 10.03 sec so far
+Iteration 56893 (of 129706): max relative diff=0.000043, 15.05 sec so far
+Iteration 63409 (of 129706): max relative diff=0.000037, 20.06 sec so far
+Iteration 69570 (of 129706): max relative diff=0.000032, 25.08 sec so far
+Iteration 75811 (of 129706): max relative diff=0.000028, 30.09 sec so far
+Iteration 82343 (of 129706): max relative diff=0.000024, 35.11 sec so far
+Iteration 88389 (of 129706): max relative diff=0.000021, 40.12 sec so far
+Iteration 94777 (of 129706): max relative diff=0.000018, 45.14 sec so far
+Iteration 101108 (of 129706): max relative diff=0.000016, 50.16 sec so far
+Iteration 107557 (of 129706): max relative diff=0.000014, 55.17 sec so far
+Iteration 113710 (of 129706): max relative diff=0.000013, 60.19 sec so far
+Iteration 119880 (of 129706): max relative diff=0.000011, 65.20 sec so far
+Iteration 125274 (of 129706): max relative diff=0.000010, 70.22 sec so far
+
+Iterative method: 129706 iterations in 74.08 seconds (average 0.000570, setup 0.17)
+
+Value in the initial state: 0.0014794248487410573
+
+Time for model checking: 77.431 seconds.
+
+Result: 0.0014794248487410573
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 17 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 65 iterations in 0.36 seconds (average 0.005538, setup 0.00)
+
+Time for model construction: 0.451 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      10431 (1 initial)
+Transitions: 28872
+
+Rate matrix: 15752 nodes (8 terminal), 28872 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=25993] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=56, compact] [20.8 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2121.600000 x 10.000000 = 21216.000000
+Fox-Glynn: left = 20194, right = 22454
+
+Starting iterations...
+
+Iterative method: 22454 iterations in 3.08 seconds (average 0.000132, setup 0.11)
+
+Value in the initial state: 0.05669433782188937
+
+Time for model checking: 3.299 seconds.
+
+Result: 0.05669433782188937
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=25993] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=56, compact] [20.8 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2121.600000 x 60.000000 = 127296.000000
+Fox-Glynn: left = 124796, right = 130325
+
+Starting iterations...
+Iteration 36212 (of 130325): max relative diff=0.000112, 5.02 sec so far
+Iteration 69319 (of 130325): max relative diff=0.000049, 10.03 sec so far
+Iteration 100709 (of 130325): max relative diff=0.000030, 15.05 sec so far
+
+Iterative method: 130325 iterations in 19.98 seconds (average 0.000153, setup 0.11)
+
+Value in the initial state: 0.06342954301339913
+
+Time for model checking: 21.324 seconds.
+
+Result: 0.06342954301339913
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=25768] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=47, compact] [20.7 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2121.600000 x 10.000000 = 21216.000000
+Fox-Glynn: left = 20194, right = 22454
+
+Starting iterations...
+
+Steady state detected at iteration 22138
+
+Iterative method: 22138 iterations in 3.48 seconds (average 0.000151, setup 0.14)
+
+Value in the initial state: 0.9433058238026262
+
+Time for model checking: 3.627 seconds.
+
+Result: 0.9433058238026262
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=25768] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=47, compact] [20.7 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2121.600000 x 60.000000 = 127296.000000
+Fox-Glynn: left = 124796, right = 130325
+
+Starting iterations...
+
+Steady state detected at iteration 22138
+
+Iterative method: 22138 iterations in 3.25 seconds (average 0.000140, setup 0.14)
+
+Value in the initial state: 0.9433080958731438
+
+Time for model checking: 3.366 seconds.
+
+Result: 0.9433080958731438
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26277] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=55, compact] [20.8 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2121.600000 x 10.000000 = 21216.000000
+Fox-Glynn: left = 20194, right = 22454
+
+Starting iterations...
+Iteration 20142 (of 22454): max relative diff=0.019561, 5.02 sec so far
+
+Iterative method: 22454 iterations in 5.72 seconds (average 0.000250, setup 0.11)
+
+Value in the initial state: 9.515677764360323
+
+Time for model checking: 6.014 seconds.
+
+Result: 9.515677764360323
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26277] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=55, compact] [20.8 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2121.600000 x 60.000000 = 127296.000000
+Fox-Glynn: left = 124796, right = 130325
+
+Starting iterations...
+Iteration 19769 (of 130325): max relative diff=0.019561, 5.02 sec so far
+Iteration 37464 (of 130325): max relative diff=0.033333, 10.03 sec so far
+Iteration 48386 (of 130325): max relative diff=0.000000, 15.05 sec so far
+Iteration 60302 (of 130325): max relative diff=0.000000, 20.06 sec so far
+Iteration 72784 (of 130325): max relative diff=0.000000, 25.08 sec so far
+Iteration 84428 (of 130325): max relative diff=0.000000, 30.09 sec so far
+Iteration 96360 (of 130325): max relative diff=0.000000, 35.11 sec so far
+Iteration 107353 (of 130325): max relative diff=0.000000, 40.12 sec so far
+Iteration 119818 (of 130325): max relative diff=0.000000, 45.14 sec so far
+
+Iterative method: 130325 iterations in 49.42 seconds (average 0.000378, setup 0.14)
+
+Value in the initial state: 56.57677955978291
+
+Time for model checking: 52.29 seconds.
+
+Result: 56.57677955978291
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26277] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=55, compact] [20.8 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2121.600000 x 10.000000 = 21216.000000
+Fox-Glynn: left = 20194, right = 22454
+
+Starting iterations...
+
+Iterative method: 22454 iterations in 4.49 seconds (average 0.000193, setup 0.14)
+
+Value in the initial state: 0.001242175664160555
+
+Time for model checking: 4.724 seconds.
+
+Result: 0.001242175664160555
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26277] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=55, compact] [20.8 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2121.600000 x 60.000000 = 127296.000000
+Fox-Glynn: left = 124796, right = 130325
+
+Starting iterations...
+Iteration 25001 (of 130325): max relative diff=0.018854, 5.01 sec so far
+Iteration 40419 (of 130325): max relative diff=0.000070, 10.03 sec so far
+Iteration 46219 (of 130325): max relative diff=0.000058, 15.05 sec so far
+Iteration 51462 (of 130325): max relative diff=0.000050, 20.06 sec so far
+Iteration 56788 (of 130325): max relative diff=0.000043, 25.08 sec so far
+Iteration 62121 (of 130325): max relative diff=0.000038, 30.09 sec so far
+Iteration 67593 (of 130325): max relative diff=0.000033, 35.11 sec so far
+Iteration 73354 (of 130325): max relative diff=0.000029, 40.12 sec so far
+Iteration 79138 (of 130325): max relative diff=0.000025, 45.14 sec so far
+Iteration 84567 (of 130325): max relative diff=0.000023, 50.16 sec so far
+Iteration 90257 (of 130325): max relative diff=0.000020, 55.17 sec so far
+Iteration 96306 (of 130325): max relative diff=0.000018, 60.19 sec so far
+Iteration 102476 (of 130325): max relative diff=0.000016, 65.20 sec so far
+Iteration 109529 (of 130325): max relative diff=0.000014, 70.22 sec so far
+Iteration 115956 (of 130325): max relative diff=0.000012, 75.23 sec so far
+Iteration 122866 (of 130325): max relative diff=0.000011, 80.25 sec so far
+
+Iterative method: 130325 iterations in 85.34 seconds (average 0.000654, setup 0.12)
+
+Value in the initial state: 0.0014004225226150828
+
+Time for model checking: 90.211 seconds.
+
+Result: 0.0014004225226150828
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2.5
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2.5
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 17 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 65 iterations in 0.39 seconds (average 0.006000, setup 0.00)
+
+Time for model construction: 0.46 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      10431 (1 initial)
+Transitions: 28872
+
+Rate matrix: 18209 nodes (9 terminal), 28872 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2131.800000 x 10.000000 = 21318.000000
+Fox-Glynn: left = 20293, right = 22559
+
+Starting iterations...
+
+Iterative method: 22559 iterations in 3.34 seconds (average 0.000143, setup 0.11)
+
+Value in the initial state: 0.034731161829906085
+
+Time for model checking: 3.548 seconds.
+
+Result: 0.034731161829906085
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2131.800000 x 60.000000 = 127908.000000
+Fox-Glynn: left = 125402, right = 130945
+
+Starting iterations...
+Iteration 34382 (of 130945): max relative diff=0.000119, 5.01 sec so far
+Iteration 70204 (of 130945): max relative diff=0.000049, 10.03 sec so far
+Iteration 103726 (of 130945): max relative diff=0.000029, 15.05 sec so far
+
+Iterative method: 130945 iterations in 18.98 seconds (average 0.000144, setup 0.12)
+
+Value in the initial state: 0.038968438171699066
+
+Time for model checking: 19.96 seconds.
+
+Result: 0.038968438171699066
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2.5
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2131.800000 x 10.000000 = 21318.000000
+Fox-Glynn: left = 20293, right = 22559
+
+Starting iterations...
+
+Steady state detected at iteration 21812
+
+Iterative method: 21812 iterations in 3.22 seconds (average 0.000141, setup 0.14)
+
+Value in the initial state: 0.9652701684294173
+
+Time for model checking: 3.309 seconds.
+
+Result: 0.9652701684294173
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2131.800000 x 60.000000 = 127908.000000
+Fox-Glynn: left = 125402, right = 130945
+
+Starting iterations...
+
+Steady state detected at iteration 21812
+
+Iterative method: 21812 iterations in 3.09 seconds (average 0.000134, setup 0.17)
+
+Value in the initial state: 0.9652708898955087
+
+Time for model checking: 3.323 seconds.
+
+Result: 0.9652708898955087
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2131.800000 x 10.000000 = 21318.000000
+Fox-Glynn: left = 20293, right = 22559
+
+Starting iterations...
+Iteration 19699 (of 22559): max relative diff=0.019467, 5.02 sec so far
+
+Iterative method: 22559 iterations in 5.83 seconds (average 0.000252, setup 0.14)
+
+Value in the initial state: 9.697417296399863
+
+Time for model checking: 6.129 seconds.
+
+Result: 9.697417296399863
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2131.800000 x 60.000000 = 127908.000000
+Fox-Glynn: left = 125402, right = 130945
+
+Starting iterations...
+Iteration 21906 (of 130945): max relative diff=0.019467, 5.02 sec so far
+Iteration 40608 (of 130945): max relative diff=0.000000, 10.03 sec so far
+Iteration 54015 (of 130945): max relative diff=0.000000, 15.05 sec so far
+Iteration 66101 (of 130945): max relative diff=0.000000, 20.06 sec so far
+Iteration 77529 (of 130945): max relative diff=0.000000, 25.08 sec so far
+Iteration 88931 (of 130945): max relative diff=0.000000, 30.09 sec so far
+Iteration 100111 (of 130945): max relative diff=0.000000, 35.11 sec so far
+Iteration 112003 (of 130945): max relative diff=0.000000, 40.12 sec so far
+Iteration 123294 (of 130945): max relative diff=0.000000, 45.14 sec so far
+
+Iterative method: 130945 iterations in 48.58 seconds (average 0.000370, setup 0.17)
+
+Value in the initial state: 57.894489616922705
+
+Time for model checking: 51.139 seconds.
+
+Result: 57.894489616922705
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2131.800000 x 10.000000 = 21318.000000
+Fox-Glynn: left = 20293, right = 22559
+
+Starting iterations...
+
+Iterative method: 22559 iterations in 4.52 seconds (average 0.000195, setup 0.12)
+
+Value in the initial state: 0.0011893028755782158
+
+Time for model checking: 4.734 seconds.
+
+Result: 0.0011893028755782158
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=2.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2131.800000 x 60.000000 = 127908.000000
+Fox-Glynn: left = 125402, right = 130945
+
+Starting iterations...
+Iteration 25692 (of 130945): max relative diff=0.023454, 5.01 sec so far
+Iteration 34551 (of 130945): max relative diff=0.000086, 10.03 sec so far
+Iteration 62380 (of 130945): max relative diff=0.000037, 15.05 sec so far
+Iteration 68558 (of 130945): max relative diff=0.000032, 20.06 sec so far
+Iteration 74704 (of 130945): max relative diff=0.000028, 25.08 sec so far
+Iteration 80567 (of 130945): max relative diff=0.000025, 30.09 sec so far
+Iteration 86638 (of 130945): max relative diff=0.000022, 35.11 sec so far
+Iteration 92551 (of 130945): max relative diff=0.000019, 40.12 sec so far
+Iteration 99180 (of 130945): max relative diff=0.000017, 45.14 sec so far
+Iteration 106492 (of 130945): max relative diff=0.000015, 50.16 sec so far
+Iteration 113730 (of 130945): max relative diff=0.000013, 55.17 sec so far
+Iteration 120508 (of 130945): max relative diff=0.000011, 60.19 sec so far
+Iteration 128189 (of 130945): max relative diff=0.000009, 65.20 sec so far
+
+Iterative method: 130945 iterations in 67.31 seconds (average 0.000513, setup 0.17)
+
+Value in the initial state: 0.0013453364272737844
+
+Time for model checking: 69.649 seconds.
+
+Result: 0.0013453364272737844
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 17 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 65 iterations in 0.41 seconds (average 0.006246, setup 0.00)
+
+Time for model construction: 0.469 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      10431 (1 initial)
+Transitions: 28872
+
+Rate matrix: 18209 nodes (9 terminal), 28872 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2142.000000 x 10.000000 = 21420.000000
+Fox-Glynn: left = 20393, right = 22664
+
+Starting iterations...
+
+Iterative method: 22664 iterations in 3.22 seconds (average 0.000138, setup 0.09)
+
+Value in the initial state: 0.0223660339020093
+
+Time for model checking: 3.428 seconds.
+
+Result: 0.0223660339020093
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2142.000000 x 60.000000 = 128520.000000
+Fox-Glynn: left = 126008, right = 131564
+
+Starting iterations...
+Iteration 31751 (of 131564): max relative diff=0.000132, 5.02 sec so far
+Iteration 62698 (of 131564): max relative diff=0.000056, 10.03 sec so far
+Iteration 94576 (of 131564): max relative diff=0.000033, 15.05 sec so far
+Iteration 125322 (of 131564): max relative diff=0.000022, 20.06 sec so far
+
+Iterative method: 131564 iterations in 21.34 seconds (average 0.000161, setup 0.14)
+
+Value in the initial state: 0.025137218755402275
+
+Time for model checking: 22.538 seconds.
+
+Result: 0.025137218755402275
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2142.000000 x 10.000000 = 21420.000000
+Fox-Glynn: left = 20393, right = 22664
+
+Starting iterations...
+
+Steady state detected at iteration 21562
+
+Iterative method: 21562 iterations in 3.38 seconds (average 0.000149, setup 0.17)
+
+Value in the initial state: 0.9776353239938429
+
+Time for model checking: 3.467 seconds.
+
+Result: 0.9776353239938429
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2142.000000 x 60.000000 = 128520.000000
+Fox-Glynn: left = 126008, right = 131564
+
+Starting iterations...
+
+Steady state detected at iteration 21562
+
+Iterative method: 21562 iterations in 3.55 seconds (average 0.000157, setup 0.16)
+
+Value in the initial state: 0.9776354699416189
+
+Time for model checking: 3.753 seconds.
+
+Result: 0.9776354699416189
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2142.000000 x 10.000000 = 21420.000000
+Fox-Glynn: left = 20393, right = 22664
+
+Starting iterations...
+Iteration 19175 (of 22664): max relative diff=0.019374, 5.02 sec so far
+
+Iterative method: 22664 iterations in 6.09 seconds (average 0.000261, setup 0.17)
+
+Value in the initial state: 9.800447038732075
+
+Time for model checking: 6.415 seconds.
+
+Result: 9.800447038732075
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2142.000000 x 60.000000 = 128520.000000
+Fox-Glynn: left = 126008, right = 131564
+
+Starting iterations...
+Iteration 20934 (of 131564): max relative diff=0.019374, 5.02 sec so far
+Iteration 38384 (of 131564): max relative diff=0.018674, 10.03 sec so far
+Iteration 48557 (of 131564): max relative diff=0.000000, 15.05 sec so far
+Iteration 59264 (of 131564): max relative diff=0.000000, 20.06 sec so far
+Iteration 70771 (of 131564): max relative diff=0.000000, 25.08 sec so far
+Iteration 82677 (of 131564): max relative diff=0.000000, 30.09 sec so far
+Iteration 94133 (of 131564): max relative diff=0.000000, 35.11 sec so far
+
+Steady state detected at iteration 95957
+
+Iterative method: 95957 iterations in 36.00 seconds (average 0.000374, setup 0.14)
+
+Value in the initial state: 58.64962046905501
+
+Time for model checking: 38.27 seconds.
+
+Result: 58.64962046905501
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2142.000000 x 10.000000 = 21420.000000
+Fox-Glynn: left = 20393, right = 22664
+
+Starting iterations...
+
+Iterative method: 22664 iterations in 4.12 seconds (average 0.000176, setup 0.12)
+
+Value in the initial state: 0.0011518057329367095
+
+Time for model checking: 4.376 seconds.
+
+Result: 0.0011518057329367095
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2142.000000 x 60.000000 = 128520.000000
+Fox-Glynn: left = 126008, right = 131564
+
+Starting iterations...
+Iteration 25153 (of 131564): max relative diff=0.028011, 5.02 sec so far
+Iteration 32164 (of 131564): max relative diff=0.000093, 10.03 sec so far
+Iteration 39445 (of 131564): max relative diff=0.000072, 15.05 sec so far
+Iteration 46566 (of 131564): max relative diff=0.000057, 20.06 sec so far
+Iteration 53580 (of 131564): max relative diff=0.000047, 25.08 sec so far
+Iteration 60057 (of 131564): max relative diff=0.000039, 30.09 sec so far
+Iteration 65418 (of 131564): max relative diff=0.000035, 35.11 sec so far
+Iteration 71133 (of 131564): max relative diff=0.000030, 40.12 sec so far
+Iteration 76973 (of 131564): max relative diff=0.000027, 45.14 sec so far
+Iteration 82413 (of 131564): max relative diff=0.000024, 50.16 sec so far
+Iteration 87862 (of 131564): max relative diff=0.000021, 55.17 sec so far
+Iteration 93446 (of 131564): max relative diff=0.000019, 60.19 sec so far
+Iteration 98872 (of 131564): max relative diff=0.000017, 65.20 sec so far
+Iteration 104184 (of 131564): max relative diff=0.000015, 70.22 sec so far
+Iteration 109862 (of 131564): max relative diff=0.000014, 75.23 sec so far
+Iteration 115148 (of 131564): max relative diff=0.000012, 80.25 sec so far
+Iteration 121011 (of 131564): max relative diff=0.000011, 85.27 sec so far
+Iteration 126498 (of 131564): max relative diff=0.000010, 90.28 sec so far
+
+Iterative method: 131564 iterations in 94.34 seconds (average 0.000716, setup 0.16)
+
+Value in the initial state: 0.0013055921729217426
+
+Time for model checking: 98.434 seconds.
+
+Result: 0.0013055921729217426
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3.5
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3.5
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 17 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 65 iterations in 0.39 seconds (average 0.006015, setup 0.00)
+
+Time for model construction: 0.424 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      10431 (1 initial)
+Transitions: 28872
+
+Rate matrix: 18209 nodes (9 terminal), 28872 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2152.200000 x 10.000000 = 21522.000000
+Fox-Glynn: left = 20492, right = 22769
+
+Starting iterations...
+
+Iterative method: 22769 iterations in 3.31 seconds (average 0.000140, setup 0.12)
+
+Value in the initial state: 0.014996748068176679
+
+Time for model checking: 3.552 seconds.
+
+Result: 0.014996748068176679
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2152.200000 x 60.000000 = 129132.000000
+Fox-Glynn: left = 126613, right = 132182
+
+Starting iterations...
+Iteration 35452 (of 132182): max relative diff=0.000115, 5.02 sec so far
+Iteration 67980 (of 132182): max relative diff=0.000051, 10.03 sec so far
+Iteration 99317 (of 132182): max relative diff=0.000031, 15.05 sec so far
+
+Iterative method: 132182 iterations in 19.88 seconds (average 0.000148, setup 0.25)
+
+Value in the initial state: 0.01687281116233197
+
+Time for model checking: 20.735 seconds.
+
+Result: 0.01687281116233197
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3.5
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2152.200000 x 10.000000 = 21522.000000
+Fox-Glynn: left = 20492, right = 22769
+
+Starting iterations...
+
+Steady state detected at iteration 21363
+
+Iterative method: 21363 iterations in 2.89 seconds (average 0.000130, setup 0.11)
+
+Value in the initial state: 0.9850042981476042
+
+Time for model checking: 2.962 seconds.
+
+Result: 0.9850042981476042
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2152.200000 x 60.000000 = 129132.000000
+Fox-Glynn: left = 126613, right = 132182
+
+Starting iterations...
+
+Steady state detected at iteration 21363
+
+Iterative method: 21363 iterations in 3.14 seconds (average 0.000138, setup 0.19)
+
+Value in the initial state: 0.9850043050541712
+
+Time for model checking: 3.305 seconds.
+
+Result: 0.9850043050541712
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2152.200000 x 10.000000 = 21522.000000
+Fox-Glynn: left = 20492, right = 22769
+
+Starting iterations...
+Iteration 19684 (of 22769): max relative diff=0.019283, 5.02 sec so far
+
+Iterative method: 22769 iterations in 5.91 seconds (average 0.000253, setup 0.14)
+
+Value in the initial state: 9.86232743244496
+
+Time for model checking: 6.028 seconds.
+
+Result: 9.86232743244496
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2152.200000 x 60.000000 = 129132.000000
+Fox-Glynn: left = 126613, right = 132182
+
+Starting iterations...
+Iteration 20552 (of 132182): max relative diff=0.019283, 5.01 sec so far
+Iteration 39971 (of 132182): max relative diff=0.000000, 10.03 sec so far
+
+Steady state detected at iteration 43942
+
+Iterative method: 43942 iterations in 11.98 seconds (average 0.000269, setup 0.16)
+
+Value in the initial state: 59.10978092974992
+
+Time for model checking: 12.633 seconds.
+
+Result: 59.10978092974992
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2152.200000 x 10.000000 = 21522.000000
+Fox-Glynn: left = 20492, right = 22769
+
+Starting iterations...
+Iteration 21718 (of 22769): max relative diff=0.032525, 5.02 sec so far
+
+Iterative method: 22769 iterations in 6.16 seconds (average 0.000264, setup 0.14)
+
+Value in the initial state: 0.0011242675653663678
+
+Time for model checking: 6.362 seconds.
+
+Result: 0.0011242675653663678
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=3.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2152.200000 x 60.000000 = 129132.000000
+Fox-Glynn: left = 126613, right = 132182
+
+Starting iterations...
+Iteration 21851 (of 132182): max relative diff=0.032525, 5.01 sec so far
+Iteration 27508 (of 132182): max relative diff=0.000114, 10.03 sec so far
+Iteration 40965 (of 132182): max relative diff=0.000068, 15.05 sec so far
+Iteration 46562 (of 132182): max relative diff=0.000057, 20.06 sec so far
+Iteration 52204 (of 132182): max relative diff=0.000048, 25.08 sec so far
+Iteration 57985 (of 132182): max relative diff=0.000041, 30.09 sec so far
+Iteration 63531 (of 132182): max relative diff=0.000036, 35.11 sec so far
+Iteration 69159 (of 132182): max relative diff=0.000032, 40.12 sec so far
+Iteration 75385 (of 132182): max relative diff=0.000028, 45.14 sec so far
+Iteration 81092 (of 132182): max relative diff=0.000024, 50.16 sec so far
+Iteration 87186 (of 132182): max relative diff=0.000021, 55.17 sec so far
+Iteration 92913 (of 132182): max relative diff=0.000019, 60.19 sec so far
+Iteration 99179 (of 132182): max relative diff=0.000017, 65.20 sec so far
+Iteration 105112 (of 132182): max relative diff=0.000015, 70.22 sec so far
+Iteration 111507 (of 132182): max relative diff=0.000013, 75.23 sec so far
+Iteration 117684 (of 132182): max relative diff=0.000012, 80.25 sec so far
+Iteration 124015 (of 132182): max relative diff=0.000010, 85.27 sec so far
+Iteration 131004 (of 132182): max relative diff=0.000009, 90.28 sec so far
+
+Iterative method: 132182 iterations in 91.48 seconds (average 0.000691, setup 0.17)
+
+Value in the initial state: 0.0012760669520126995
+
+Time for model checking: 95.943 seconds.
+
+Result: 0.0012760669520126995
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 17 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 65 iterations in 0.30 seconds (average 0.004569, setup 0.00)
+
+Time for model construction: 0.409 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      10431 (1 initial)
+Transitions: 28872
+
+Rate matrix: 18209 nodes (9 terminal), 28872 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=66, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2162.400000 x 10.000000 = 21624.000000
+Fox-Glynn: left = 20592, right = 22874
+
+Starting iterations...
+
+Iterative method: 22874 iterations in 3.59 seconds (average 0.000150, setup 0.17)
+
+Value in the initial state: 0.010396549799880521
+
+Time for model checking: 3.742 seconds.
+
+Result: 0.010396549799880521
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=66, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2162.400000 x 60.000000 = 129744.000000
+Fox-Glynn: left = 127220, right = 132802
+
+Starting iterations...
+Iteration 38139 (of 132802): max relative diff=0.000105, 5.02 sec so far
+Iteration 73495 (of 132802): max relative diff=0.000046, 10.03 sec so far
+Iteration 110150 (of 132802): max relative diff=0.000026, 15.05 sec so far
+
+Iterative method: 132802 iterations in 18.11 seconds (average 0.000135, setup 0.12)
+
+Value in the initial state: 0.011705373245946315
+
+Time for model checking: 19.128 seconds.
+
+Result: 0.011705373245946315
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=57, compact] [20.8 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2162.400000 x 10.000000 = 21624.000000
+Fox-Glynn: left = 20592, right = 22874
+
+Starting iterations...
+
+Steady state detected at iteration 21202
+
+Iterative method: 21202 iterations in 2.94 seconds (average 0.000133, setup 0.12)
+
+Value in the initial state: 0.9896041703601633
+
+Time for model checking: 3.092 seconds.
+
+Result: 0.9896041703601633
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=57, compact] [20.8 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2162.400000 x 60.000000 = 129744.000000
+Fox-Glynn: left = 127220, right = 132802
+
+Starting iterations...
+
+Steady state detected at iteration 21202
+
+Iterative method: 21202 iterations in 2.81 seconds (average 0.000127, setup 0.11)
+
+Value in the initial state: 0.9896041704035137
+
+Time for model checking: 2.888 seconds.
+
+Result: 0.9896041704035137
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2162.400000 x 10.000000 = 21624.000000
+Fox-Glynn: left = 20592, right = 22874
+
+Starting iterations...
+Iteration 20050 (of 22874): max relative diff=0.019192, 5.01 sec so far
+
+Iterative method: 22874 iterations in 5.81 seconds (average 0.000249, setup 0.11)
+
+Value in the initial state: 9.901295548821192
+
+Time for model checking: 6.028 seconds.
+
+Result: 9.901295548821192
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2162.400000 x 60.000000 = 129744.000000
+Fox-Glynn: left = 127220, right = 132802
+
+Starting iterations...
+Iteration 19323 (of 132802): max relative diff=0.019192, 5.02 sec so far
+Iteration 37651 (of 132802): max relative diff=0.019201, 10.03 sec so far
+
+Steady state detected at iteration 39505
+
+Iterative method: 39505 iterations in 11.16 seconds (average 0.000278, setup 0.19)
+
+Value in the initial state: 59.380083099978194
+
+Time for model checking: 11.416 seconds.
+
+Result: 59.380083099978194
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2162.400000 x 10.000000 = 21624.000000
+Fox-Glynn: left = 20592, right = 22874
+
+Starting iterations...
+Iteration 19654 (of 22874): max relative diff=0.000469, 5.02 sec so far
+
+Iterative method: 22874 iterations in 7.89 seconds (average 0.000337, setup 0.17)
+
+Value in the initial state: 0.001103463970280492
+
+Time for model checking: 8.179 seconds.
+
+Result: 0.001103463970280492
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2162.400000 x 60.000000 = 129744.000000
+Fox-Glynn: left = 127220, right = 132802
+
+Starting iterations...
+Iteration 19988 (of 132802): max relative diff=0.000459, 5.02 sec so far
+Iteration 25885 (of 132802): max relative diff=0.000123, 10.03 sec so far
+Iteration 31873 (of 132802): max relative diff=0.000094, 15.05 sec so far
+Iteration 37982 (of 132802): max relative diff=0.000075, 20.06 sec so far
+Iteration 43557 (of 132802): max relative diff=0.000062, 25.08 sec so far
+Iteration 49403 (of 132802): max relative diff=0.000052, 30.09 sec so far
+Iteration 55076 (of 132802): max relative diff=0.000045, 35.11 sec so far
+Iteration 60657 (of 132802): max relative diff=0.000039, 40.12 sec so far
+Iteration 66157 (of 132802): max relative diff=0.000034, 45.14 sec so far
+Iteration 71928 (of 132802): max relative diff=0.000030, 50.16 sec so far
+Iteration 77663 (of 132802): max relative diff=0.000026, 55.17 sec so far
+Iteration 83159 (of 132802): max relative diff=0.000023, 60.19 sec so far
+Iteration 88468 (of 132802): max relative diff=0.000021, 65.20 sec so far
+Iteration 93959 (of 132802): max relative diff=0.000019, 70.22 sec so far
+Iteration 100538 (of 132802): max relative diff=0.000016, 75.23 sec so far
+Iteration 107401 (of 132802): max relative diff=0.000014, 80.25 sec so far
+Iteration 113411 (of 132802): max relative diff=0.000013, 85.27 sec so far
+Iteration 119438 (of 132802): max relative diff=0.000011, 90.28 sec so far
+Iteration 124982 (of 132802): max relative diff=0.000010, 95.30 sec so far
+Iteration 130439 (of 132802): max relative diff=0.000009, 100.31 sec so far
+
+Iterative method: 132802 iterations in 102.56 seconds (average 0.000771, setup 0.14)
+
+Value in the initial state: 0.0012535820953558585
+
+Time for model checking: 106.883 seconds.
+
+Result: 0.0012535820953558585
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4.5
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4.5
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 17 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 65 iterations in 0.41 seconds (average 0.006262, setup 0.00)
+
+Time for model construction: 0.46 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      10431 (1 initial)
+Transitions: 28872
+
+Rate matrix: 18209 nodes (9 terminal), 28872 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2172.600000 x 10.000000 = 21726.000000
+Fox-Glynn: left = 20692, right = 22979
+
+Starting iterations...
+
+Iterative method: 22979 iterations in 4.14 seconds (average 0.000173, setup 0.16)
+
+Value in the initial state: 0.007412254071010654
+
+Time for model checking: 4.275 seconds.
+
+Result: 0.007412254071010654
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2172.600000 x 60.000000 = 130356.000000
+Fox-Glynn: left = 127826, right = 133422
+
+Starting iterations...
+Iteration 28965 (of 133422): max relative diff=0.000148, 5.02 sec so far
+Iteration 59361 (of 133422): max relative diff=0.000061, 10.03 sec so far
+Iteration 90150 (of 133422): max relative diff=0.000035, 15.05 sec so far
+Iteration 120789 (of 133422): max relative diff=0.000023, 20.06 sec so far
+
+Iterative method: 133422 iterations in 22.27 seconds (average 0.000165, setup 0.19)
+
+Value in the initial state: 0.008349436168115114
+
+Time for model checking: 23.964 seconds.
+
+Result: 0.008349436168115114
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4.5
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2172.600000 x 10.000000 = 21726.000000
+Fox-Glynn: left = 20692, right = 22979
+
+Starting iterations...
+
+Steady state detected at iteration 21072
+
+Iterative method: 21072 iterations in 3.47 seconds (average 0.000158, setup 0.14)
+
+Value in the initial state: 0.9925882275941856
+
+Time for model checking: 3.672 seconds.
+
+Result: 0.9925882275941856
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2172.600000 x 60.000000 = 130356.000000
+Fox-Glynn: left = 127826, right = 133422
+
+Starting iterations...
+
+Steady state detected at iteration 21072
+
+Iterative method: 21072 iterations in 3.47 seconds (average 0.000159, setup 0.12)
+
+Value in the initial state: 0.9925882275942397
+
+Time for model checking: 3.841 seconds.
+
+Result: 0.9925882275942397
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2172.600000 x 10.000000 = 21726.000000
+Fox-Glynn: left = 20692, right = 22979
+
+Starting iterations...
+Iteration 18259 (of 22979): max relative diff=0.019102, 5.02 sec so far
+
+Iterative method: 22979 iterations in 6.31 seconds (average 0.000270, setup 0.11)
+
+Value in the initial state: 9.926827658474108
+
+Time for model checking: 6.945 seconds.
+
+Result: 9.926827658474108
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2172.600000 x 60.000000 = 130356.000000
+Fox-Glynn: left = 127826, right = 133422
+
+Starting iterations...
+Iteration 18054 (of 133422): max relative diff=0.019102, 5.02 sec so far
+Iteration 36298 (of 133422): max relative diff=0.019102, 10.03 sec so far
+
+Steady state detected at iteration 39678
+
+Iterative method: 39678 iterations in 11.56 seconds (average 0.000288, setup 0.14)
+
+Value in the initial state: 59.55513896773686
+
+Time for model checking: 12.22 seconds.
+
+Result: 59.55513896773686
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2172.600000 x 10.000000 = 21726.000000
+Fox-Glynn: left = 20692, right = 22979
+
+Starting iterations...
+Iteration 18191 (of 22979): max relative diff=0.000488, 5.02 sec so far
+
+Iterative method: 22979 iterations in 9.41 seconds (average 0.000403, setup 0.14)
+
+Value in the initial state: 0.0010873766539732815
+
+Time for model checking: 9.863 seconds.
+
+Result: 0.0010873766539732815
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=4.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2172.600000 x 60.000000 = 130356.000000
+Fox-Glynn: left = 127826, right = 133422
+
+Starting iterations...
+Iteration 18013 (of 133422): max relative diff=0.000489, 5.01 sec so far
+Iteration 23317 (of 133422): max relative diff=0.000179, 10.03 sec so far
+Iteration 28624 (of 133422): max relative diff=0.000108, 15.05 sec so far
+Iteration 33888 (of 133422): max relative diff=0.000087, 20.06 sec so far
+Iteration 39620 (of 133422): max relative diff=0.000071, 25.08 sec so far
+Iteration 45045 (of 133422): max relative diff=0.000059, 30.09 sec so far
+Iteration 50714 (of 133422): max relative diff=0.000050, 35.11 sec so far
+Iteration 56072 (of 133422): max relative diff=0.000043, 40.12 sec so far
+Iteration 61457 (of 133422): max relative diff=0.000038, 45.14 sec so far
+Iteration 66793 (of 133422): max relative diff=0.000033, 50.16 sec so far
+Iteration 71979 (of 133422): max relative diff=0.000030, 55.17 sec so far
+Iteration 77204 (of 133422): max relative diff=0.000026, 60.19 sec so far
+Iteration 82736 (of 133422): max relative diff=0.000024, 65.20 sec so far
+Iteration 88120 (of 133422): max relative diff=0.000021, 70.22 sec so far
+Iteration 93450 (of 133422): max relative diff=0.000019, 75.23 sec so far
+Iteration 98659 (of 133422): max relative diff=0.000017, 80.25 sec so far
+Iteration 104037 (of 133422): max relative diff=0.000015, 85.27 sec so far
+Iteration 109191 (of 133422): max relative diff=0.000014, 90.28 sec so far
+Iteration 114315 (of 133422): max relative diff=0.000013, 95.30 sec so far
+Iteration 119606 (of 133422): max relative diff=0.000011, 100.31 sec so far
+Iteration 124919 (of 133422): max relative diff=0.000010, 105.33 sec so far
+Iteration 130270 (of 133422): max relative diff=0.000009, 110.34 sec so far
+
+Iterative method: 133422 iterations in 113.42 seconds (average 0.000849, setup 0.17)
+
+Value in the initial state: 0.0012360924278066164
+
+Time for model checking: 118.47 seconds.
+
+Result: 0.0012360924278066164
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=5
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=5
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 17 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 65 iterations in 0.53 seconds (average 0.008169, setup 0.00)
+
+Time for model construction: 0.475 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      10431 (1 initial)
+Transitions: 28872
+
+Rate matrix: 18209 nodes (9 terminal), 28872 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2182.800000 x 10.000000 = 21828.000000
+Fox-Glynn: left = 20791, right = 23084
+
+Starting iterations...
+
+Iterative method: 23084 iterations in 4.17 seconds (average 0.000173, setup 0.17)
+
+Value in the initial state: 0.005412308708502025
+
+Time for model checking: 4.321 seconds.
+
+Result: 0.005412308708502025
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 10379 of 10431 (99.5%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26974] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [122.7 KB]
+Creating vector for diagonals... [dist=74, compact] [21.0 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2182.800000 x 60.000000 = 130968.000000
+Fox-Glynn: left = 128432, right = 134041
+
+Starting iterations...
+Iteration 28309 (of 134041): max relative diff=0.000152, 5.02 sec so far
+Iteration 57212 (of 134041): max relative diff=0.000064, 10.03 sec so far
+Iteration 87665 (of 134041): max relative diff=0.000036, 15.05 sec so far
+Iteration 119106 (of 134041): max relative diff=0.000024, 20.06 sec so far
+
+Iterative method: 134041 iterations in 22.59 seconds (average 0.000167, setup 0.17)
+
+Value in the initial state: 0.006098738684593691
+
+Time for model checking: 23.449 seconds.
+
+Result: 0.006098738684593691
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=5
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2182.800000 x 10.000000 = 21828.000000
+Fox-Glynn: left = 20791, right = 23084
+
+Starting iterations...
+
+Steady state detected at iteration 20967
+
+Iterative method: 20967 iterations in 3.53 seconds (average 0.000160, setup 0.17)
+
+Value in the initial state: 0.9945880027177134
+
+Time for model checking: 3.699 seconds.
+
+Result: 0.9945880027177134
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9215 of 10431 (88.3%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26759] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [111.1 KB]
+Creating vector for diagonals... [dist=65, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2182.800000 x 60.000000 = 130968.000000
+Fox-Glynn: left = 128432, right = 134041
+
+Starting iterations...
+
+Steady state detected at iteration 20967
+
+Iterative method: 20967 iterations in 3.34 seconds (average 0.000151, setup 0.19)
+
+Value in the initial state: 0.9945880027177152
+
+Time for model checking: 3.51 seconds.
+
+Result: 0.9945880027177152
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2182.800000 x 10.000000 = 21828.000000
+Fox-Glynn: left = 20791, right = 23084
+
+Starting iterations...
+Iteration 18685 (of 23084): max relative diff=0.019012, 5.02 sec so far
+
+Iterative method: 23084 iterations in 6.36 seconds (average 0.000267, setup 0.19)
+
+Value in the initial state: 9.944131211927266
+
+Time for model checking: 6.562 seconds.
+
+Result: 9.944131211927266
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2182.800000 x 60.000000 = 130968.000000
+Fox-Glynn: left = 128432, right = 134041
+
+Starting iterations...
+Iteration 18465 (of 134041): max relative diff=0.019012, 5.01 sec so far
+Iteration 38169 (of 134041): max relative diff=0.019361, 10.03 sec so far
+
+Steady state detected at iteration 39866
+
+Iterative method: 39866 iterations in 11.05 seconds (average 0.000273, setup 0.17)
+
+Value in the initial state: 59.672653165064474
+
+Time for model checking: 11.493 seconds.
+
+Result: 59.672653165064474
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2182.800000 x 10.000000 = 21828.000000
+Fox-Glynn: left = 20791, right = 23084
+
+Starting iterations...
+Iteration 17564 (of 23084): max relative diff=0.000490, 5.01 sec so far
+
+Iterative method: 23084 iterations in 9.20 seconds (average 0.000391, setup 0.17)
+
+Value in the initial state: 0.0010746895185363022
+
+Time for model checking: 9.344 seconds.
+
+Result: 0.0010746895185363022
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=24,D_max=24,ratio_F=5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=27268] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [123.0 KB]
+Creating vector for diagonals... [dist=73, compact] [20.9 KB]
+Allocating iteration vectors... [3 x 81.5 KB]
+TOTAL: [1.6 MB]
+
+Uniformisation: q.t = 2182.800000 x 60.000000 = 130968.000000
+Fox-Glynn: left = 128432, right = 134041
+
+Starting iterations...
+Iteration 17953 (of 134041): max relative diff=0.000489, 5.02 sec so far
+Iteration 23808 (of 134041): max relative diff=0.000133, 10.03 sec so far
+Iteration 29727 (of 134041): max relative diff=0.000103, 15.05 sec so far
+Iteration 35385 (of 134041): max relative diff=0.000082, 20.06 sec so far
+Iteration 41996 (of 134041): max relative diff=0.000065, 25.08 sec so far
+Iteration 47746 (of 134041): max relative diff=0.000055, 30.09 sec so far
+Iteration 53835 (of 134041): max relative diff=0.000046, 35.11 sec so far
+Iteration 59781 (of 134041): max relative diff=0.000040, 40.12 sec so far
+Iteration 65659 (of 134041): max relative diff=0.000034, 45.14 sec so far
+Iteration 72372 (of 134041): max relative diff=0.000029, 50.16 sec so far
+Iteration 78657 (of 134041): max relative diff=0.000026, 55.17 sec so far
+Iteration 85136 (of 134041): max relative diff=0.000022, 60.19 sec so far
+Iteration 91107 (of 134041): max relative diff=0.000020, 65.20 sec so far
+Iteration 97912 (of 134041): max relative diff=0.000017, 70.22 sec so far
+Iteration 104236 (of 134041): max relative diff=0.000015, 75.23 sec so far
+Iteration 110118 (of 134041): max relative diff=0.000014, 80.25 sec so far
+Iteration 115742 (of 134041): max relative diff=0.000012, 85.27 sec so far
+Iteration 121816 (of 134041): max relative diff=0.000011, 90.28 sec so far
+Iteration 128638 (of 134041): max relative diff=0.000010, 95.30 sec so far
+
+Iterative method: 134041 iterations in 99.41 seconds (average 0.000740, setup 0.20)
+
+Value in the initial state: 0.0012222384302628807
+
+Time for model checking: 103.573 seconds.
+
+Result: 0.0012222384302628807
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=0.5
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=0.5
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 16 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 59 iterations in 0.23 seconds (average 0.003966, setup 0.00)
+
+Time for model construction: 0.333 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      9150 (1 initial)
+Transitions: 25676
+
+Rate matrix: 17722 nodes (8 terminal), 25676 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2091.000000 x 10.000000 = 20910.000000
+Fox-Glynn: left = 19895, right = 22139
+
+Starting iterations...
+
+Iterative method: 22139 iterations in 3.06 seconds (average 0.000133, setup 0.11)
+
+Value in the initial state: 0.9981652483361501
+
+Time for model checking: 3.257 seconds.
+
+Result: 0.9981652483361501
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=0.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2091.000000 x 60.000000 = 125460.000000
+Fox-Glynn: left = 122978, right = 128468
+
+Starting iterations...
+
+Steady state detected at iteration 31261
+
+Iterative method: 31261 iterations in 4.52 seconds (average 0.000138, setup 0.19)
+
+Value in the initial state: 0.9999283230354791
+
+Time for model checking: 4.656 seconds.
+
+Result: 0.9999283230354791
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=0.5
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2091.000000 x 10.000000 = 20910.000000
+Fox-Glynn: left = 19895, right = 22139
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.16 seconds (average 0.000000, setup 0.16)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.155 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=0.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2091.000000 x 60.000000 = 125460.000000
+Fox-Glynn: left = 122978, right = 128468
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.16 seconds (average 0.000000, setup 0.16)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.149 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=0.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2091.000000 x 10.000000 = 20910.000000
+Fox-Glynn: left = 19895, right = 22139
+
+Starting iterations...
+Iteration 20850 (of 22139): max relative diff=0.019847, 5.02 sec so far
+
+Iterative method: 22139 iterations in 5.39 seconds (average 0.000238, setup 0.12)
+
+Value in the initial state: 2.0534679060215084
+
+Time for model checking: 5.599 seconds.
+
+Result: 2.0534679060215084
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=0.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2091.000000 x 60.000000 = 125460.000000
+Fox-Glynn: left = 122978, right = 128468
+
+Starting iterations...
+Iteration 20523 (of 128468): max relative diff=0.019847, 5.02 sec so far
+Iteration 39164 (of 128468): max relative diff=0.000518, 10.03 sec so far
+Iteration 51018 (of 128468): max relative diff=0.000518, 15.05 sec so far
+Iteration 62821 (of 128468): max relative diff=0.000518, 20.06 sec so far
+Iteration 74503 (of 128468): max relative diff=0.000518, 25.08 sec so far
+Iteration 85794 (of 128468): max relative diff=0.000518, 30.09 sec so far
+Iteration 97157 (of 128468): max relative diff=0.000518, 35.11 sec so far
+Iteration 109212 (of 128468): max relative diff=0.000518, 40.12 sec so far
+Iteration 121346 (of 128468): max relative diff=0.000518, 45.14 sec so far
+
+Iterative method: 128468 iterations in 48.38 seconds (average 0.000376, setup 0.11)
+
+Value in the initial state: 2.0556402788766603
+
+Time for model checking: 51.585 seconds.
+
+Result: 2.0556402788766603
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=0.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2091.000000 x 10.000000 = 20910.000000
+Fox-Glynn: left = 19895, right = 22139
+
+Starting iterations...
+
+Iterative method: 22139 iterations in 3.97 seconds (average 0.000172, setup 0.16)
+
+Value in the initial state: 0.003090626787990744
+
+Time for model checking: 4.211 seconds.
+
+Result: 0.003090626787990744
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=0.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2091.000000 x 60.000000 = 125460.000000
+Fox-Glynn: left = 122978, right = 128468
+
+Starting iterations...
+Iteration 27218 (of 128468): max relative diff=0.004782, 5.01 sec so far
+Iteration 54212 (of 128468): max relative diff=0.004782, 10.03 sec so far
+Iteration 81009 (of 128468): max relative diff=0.004782, 15.05 sec so far
+Iteration 107893 (of 128468): max relative diff=0.004782, 20.06 sec so far
+
+Iterative method: 128468 iterations in 23.75 seconds (average 0.000184, setup 0.11)
+
+Value in the initial state: 0.003094031856243216
+
+Time for model checking: 25.182 seconds.
+
+Result: 0.003094031856243216
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 16 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 59 iterations in 0.30 seconds (average 0.005017, setup 0.00)
+
+Time for model construction: 0.399 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      9150 (1 initial)
+Transitions: 25676
+
+Rate matrix: 17722 nodes (8 terminal), 25676 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2101.200000 x 10.000000 = 21012.000000
+Fox-Glynn: left = 19995, right = 22244
+
+Starting iterations...
+
+Iterative method: 22244 iterations in 3.61 seconds (average 0.000155, setup 0.16)
+
+Value in the initial state: 0.9961443044557045
+
+Time for model checking: 3.722 seconds.
+
+Result: 0.9961443044557045
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2101.200000 x 60.000000 = 126072.000000
+Fox-Glynn: left = 123583, right = 129086
+
+Starting iterations...
+Iteration 32517 (of 129086): max relative diff=0.000000, 5.01 sec so far
+
+Steady state detected at iteration 34054
+
+Iterative method: 34054 iterations in 5.38 seconds (average 0.000154, setup 0.14)
+
+Value in the initial state: 0.9998982040564954
+
+Time for model checking: 5.587 seconds.
+
+Result: 0.9998982040564954
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2101.200000 x 10.000000 = 21012.000000
+Fox-Glynn: left = 19995, right = 22244
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.14 seconds (average 0.000000, setup 0.14)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.175 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2101.200000 x 60.000000 = 126072.000000
+Fox-Glynn: left = 123583, right = 129086
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.14 seconds (average 0.000000, setup 0.14)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.182 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2101.200000 x 10.000000 = 21012.000000
+Fox-Glynn: left = 19995, right = 22244
+
+Starting iterations...
+Iteration 18929 (of 22244): max relative diff=0.019751, 5.01 sec so far
+
+Iterative method: 22244 iterations in 5.98 seconds (average 0.000263, setup 0.14)
+
+Value in the initial state: 2.2379651533910816
+
+Time for model checking: 6.186 seconds.
+
+Result: 2.2379651533910816
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2101.200000 x 60.000000 = 126072.000000
+Fox-Glynn: left = 123583, right = 129086
+
+Starting iterations...
+Iteration 19439 (of 129086): max relative diff=0.019751, 5.02 sec so far
+Iteration 37601 (of 129086): max relative diff=0.019037, 10.03 sec so far
+Iteration 48308 (of 129086): max relative diff=0.000388, 15.05 sec so far
+Iteration 59163 (of 129086): max relative diff=0.000388, 20.06 sec so far
+Iteration 70063 (of 129086): max relative diff=0.000388, 25.08 sec so far
+Iteration 80810 (of 129086): max relative diff=0.000388, 30.09 sec so far
+Iteration 91785 (of 129086): max relative diff=0.000388, 35.11 sec so far
+Iteration 102882 (of 129086): max relative diff=0.000388, 40.12 sec so far
+Iteration 113929 (of 129086): max relative diff=0.000388, 45.14 sec so far
+Iteration 124517 (of 129086): max relative diff=0.000388, 50.16 sec so far
+
+Iterative method: 129086 iterations in 52.33 seconds (average 0.000404, setup 0.17)
+
+Value in the initial state: 2.2432541869771394
+
+Time for model checking: 54.812 seconds.
+
+Result: 2.2432541869771394
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2101.200000 x 10.000000 = 21012.000000
+Fox-Glynn: left = 19995, right = 22244
+
+Starting iterations...
+
+Iterative method: 22244 iterations in 4.22 seconds (average 0.000182, setup 0.17)
+
+Value in the initial state: 0.004114787934135948
+
+Time for model checking: 4.477 seconds.
+
+Result: 0.004114787934135948
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2101.200000 x 60.000000 = 126072.000000
+Fox-Glynn: left = 123583, right = 129086
+
+Starting iterations...
+Iteration 27417 (of 129086): max relative diff=0.009518, 5.01 sec so far
+Iteration 55177 (of 129086): max relative diff=0.009518, 10.03 sec so far
+Iteration 74826 (of 129086): max relative diff=0.009518, 15.05 sec so far
+Iteration 80301 (of 129086): max relative diff=0.000388, 20.06 sec so far
+Iteration 85718 (of 129086): max relative diff=0.000388, 25.08 sec so far
+Iteration 91462 (of 129086): max relative diff=0.000388, 30.09 sec so far
+Iteration 97150 (of 129086): max relative diff=0.000388, 35.11 sec so far
+Iteration 103607 (of 129086): max relative diff=0.000388, 40.12 sec so far
+Iteration 110623 (of 129086): max relative diff=0.000388, 45.14 sec so far
+Iteration 122861 (of 129086): max relative diff=0.000388, 50.16 sec so far
+
+Iterative method: 129086 iterations in 51.28 seconds (average 0.000396, setup 0.16)
+
+Value in the initial state: 0.00412416906558837
+
+Time for model checking: 53.981 seconds.
+
+Result: 0.00412416906558837
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1.5
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1.5
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 16 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 59 iterations in 0.27 seconds (average 0.004492, setup 0.00)
+
+Time for model construction: 0.327 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      9150 (1 initial)
+Transitions: 25676
+
+Rate matrix: 17722 nodes (8 terminal), 25676 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2111.400000 x 10.000000 = 21114.000000
+Fox-Glynn: left = 20094, right = 22349
+
+Starting iterations...
+
+Iterative method: 22349 iterations in 2.92 seconds (average 0.000125, setup 0.12)
+
+Value in the initial state: 0.9919940630019264
+
+Time for model checking: 3.176 seconds.
+
+Result: 0.9919940630019264
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2111.400000 x 60.000000 = 126684.000000
+Fox-Glynn: left = 124190, right = 129706
+
+Starting iterations...
+Iteration 36773 (of 129706): max relative diff=0.000000, 5.02 sec so far
+
+Steady state detected at iteration 37541
+
+Iterative method: 37541 iterations in 5.23 seconds (average 0.000137, setup 0.09)
+
+Value in the initial state: 0.9998551850265975
+
+Time for model checking: 5.59 seconds.
+
+Result: 0.9998551850265975
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1.5
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2111.400000 x 10.000000 = 21114.000000
+Fox-Glynn: left = 20094, right = 22349
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.16 seconds (average 0.000000, setup 0.16)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.153 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2111.400000 x 60.000000 = 126684.000000
+Fox-Glynn: left = 124190, right = 129706
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.11 seconds (average 0.000000, setup 0.11)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.121 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2111.400000 x 10.000000 = 21114.000000
+Fox-Glynn: left = 20094, right = 22349
+
+Starting iterations...
+Iteration 20736 (of 22349): max relative diff=0.019655, 5.02 sec so far
+
+Iterative method: 22349 iterations in 5.48 seconds (average 0.000241, setup 0.11)
+
+Value in the initial state: 2.4644062218453078
+
+Time for model checking: 5.845 seconds.
+
+Result: 2.4644062218453078
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2111.400000 x 60.000000 = 126684.000000
+Fox-Glynn: left = 124190, right = 129706
+
+Starting iterations...
+Iteration 21198 (of 129706): max relative diff=0.019655, 5.02 sec so far
+Iteration 39004 (of 129706): max relative diff=0.000308, 10.03 sec so far
+Iteration 51632 (of 129706): max relative diff=0.000308, 15.05 sec so far
+Iteration 64068 (of 129706): max relative diff=0.000308, 20.06 sec so far
+Iteration 76014 (of 129706): max relative diff=0.000308, 25.08 sec so far
+Iteration 88479 (of 129706): max relative diff=0.000308, 30.09 sec so far
+Iteration 100780 (of 129706): max relative diff=0.000308, 35.11 sec so far
+Iteration 113416 (of 129706): max relative diff=0.000308, 40.12 sec so far
+Iteration 125665 (of 129706): max relative diff=0.000308, 45.14 sec so far
+
+Iterative method: 129706 iterations in 46.83 seconds (average 0.000360, setup 0.09)
+
+Value in the initial state: 2.477265234952554
+
+Time for model checking: 49.47 seconds.
+
+Result: 2.477265234952554
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2111.400000 x 10.000000 = 21114.000000
+Fox-Glynn: left = 20094, right = 22349
+
+Starting iterations...
+
+Iterative method: 22349 iterations in 3.70 seconds (average 0.000160, setup 0.12)
+
+Value in the initial state: 0.005172157688124452
+
+Time for model checking: 4.05 seconds.
+
+Result: 0.005172157688124452
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=1.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2111.400000 x 60.000000 = 126684.000000
+Fox-Glynn: left = 124190, right = 129706
+
+Starting iterations...
+Iteration 30800 (of 129706): max relative diff=0.014209, 5.02 sec so far
+Iteration 50552 (of 129706): max relative diff=0.014209, 10.03 sec so far
+Iteration 55983 (of 129706): max relative diff=0.000308, 15.05 sec so far
+Iteration 62584 (of 129706): max relative diff=0.000308, 20.06 sec so far
+Iteration 69282 (of 129706): max relative diff=0.000308, 25.08 sec so far
+Iteration 74628 (of 129706): max relative diff=0.000308, 30.09 sec so far
+Iteration 80077 (of 129706): max relative diff=0.000308, 35.11 sec so far
+Iteration 85727 (of 129706): max relative diff=0.000308, 40.12 sec so far
+Iteration 91109 (of 129706): max relative diff=0.000308, 45.14 sec so far
+Iteration 97340 (of 129706): max relative diff=0.000308, 50.16 sec so far
+Iteration 102925 (of 129706): max relative diff=0.000308, 55.17 sec so far
+Iteration 108877 (of 129706): max relative diff=0.000308, 60.19 sec so far
+Iteration 114911 (of 129706): max relative diff=0.000308, 65.20 sec so far
+Iteration 120344 (of 129706): max relative diff=0.000308, 70.22 sec so far
+Iteration 126330 (of 129706): max relative diff=0.000308, 75.23 sec so far
+
+Iterative method: 129706 iterations in 78.22 seconds (average 0.000602, setup 0.11)
+
+Value in the initial state: 0.005197042295456787
+
+Time for model checking: 82.42 seconds.
+
+Result: 0.005197042295456787
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 16 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 59 iterations in 0.34 seconds (average 0.005831, setup 0.00)
+
+Time for model construction: 0.428 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      9150 (1 initial)
+Transitions: 25676
+
+Rate matrix: 15277 nodes (7 terminal), 25676 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=25092] [1.1 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=47, compact] [18.2 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2121.600000 x 10.000000 = 21216.000000
+Fox-Glynn: left = 20194, right = 22454
+
+Starting iterations...
+
+Iterative method: 22454 iterations in 3.06 seconds (average 0.000130, setup 0.14)
+
+Value in the initial state: 0.9848338757981941
+
+Time for model checking: 3.173 seconds.
+
+Result: 0.9848338757981941
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=25092] [1.1 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=47, compact] [18.2 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2121.600000 x 60.000000 = 127296.000000
+Fox-Glynn: left = 124796, right = 130325
+
+Starting iterations...
+Iteration 35498 (of 130325): max relative diff=0.000000, 5.01 sec so far
+
+Steady state detected at iteration 41522
+
+Iterative method: 41522 iterations in 6.00 seconds (average 0.000142, setup 0.11)
+
+Value in the initial state: 0.9997996319492863
+
+Time for model checking: 6.348 seconds.
+
+Result: 0.9997996319492863
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=25372] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=46, compact] [18.2 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2121.600000 x 10.000000 = 21216.000000
+Fox-Glynn: left = 20194, right = 22454
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.16 seconds (average 0.000000, setup 0.16)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.16 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=25372] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=46, compact] [18.2 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2121.600000 x 60.000000 = 127296.000000
+Fox-Glynn: left = 124796, right = 130325
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.12 seconds (average 0.000000, setup 0.12)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.143 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=25372] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=46, compact] [18.2 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2121.600000 x 10.000000 = 21216.000000
+Fox-Glynn: left = 20194, right = 22454
+
+Starting iterations...
+Iteration 21377 (of 22454): max relative diff=0.019561, 5.01 sec so far
+
+Iterative method: 22454 iterations in 5.36 seconds (average 0.000232, setup 0.14)
+
+Value in the initial state: 2.7116812531453034
+
+Time for model checking: 5.667 seconds.
+
+Result: 2.7116812531453034
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=25372] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=46, compact] [18.2 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2121.600000 x 60.000000 = 127296.000000
+Fox-Glynn: left = 124796, right = 130325
+
+Starting iterations...
+Iteration 22784 (of 130325): max relative diff=0.019561, 5.02 sec so far
+Iteration 40707 (of 130325): max relative diff=0.000253, 10.03 sec so far
+Iteration 55124 (of 130325): max relative diff=0.000253, 15.05 sec so far
+Iteration 69123 (of 130325): max relative diff=0.000253, 20.06 sec so far
+Iteration 83898 (of 130325): max relative diff=0.000253, 25.08 sec so far
+Iteration 99179 (of 130325): max relative diff=0.000253, 30.09 sec so far
+Iteration 113535 (of 130325): max relative diff=0.000253, 35.11 sec so far
+Iteration 129709 (of 130325): max relative diff=0.000253, 40.12 sec so far
+
+Iterative method: 130325 iterations in 40.41 seconds (average 0.000309, setup 0.12)
+
+Value in the initial state: 2.7401046608409363
+
+Time for model checking: 42.153 seconds.
+
+Result: 2.7401046608409363
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=25372] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=46, compact] [18.2 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2121.600000 x 10.000000 = 21216.000000
+Fox-Glynn: left = 20194, right = 22454
+
+Starting iterations...
+
+Iterative method: 22454 iterations in 2.81 seconds (average 0.000120, setup 0.12)
+
+Value in the initial state: 0.006279204071926375
+
+Time for model checking: 2.917 seconds.
+
+Result: 0.006279204071926375
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=25372] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=46, compact] [18.2 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2121.600000 x 60.000000 = 127296.000000
+Fox-Glynn: left = 124796, right = 130325
+
+Starting iterations...
+Iteration 37217 (of 130325): max relative diff=0.018854, 5.02 sec so far
+Iteration 44788 (of 130325): max relative diff=0.000253, 10.03 sec so far
+Iteration 52046 (of 130325): max relative diff=0.000253, 15.05 sec so far
+Iteration 59044 (of 130325): max relative diff=0.000253, 20.06 sec so far
+Iteration 65959 (of 130325): max relative diff=0.000253, 25.08 sec so far
+Iteration 94831 (of 130325): max relative diff=0.000253, 30.09 sec so far
+Iteration 101996 (of 130325): max relative diff=0.000253, 35.11 sec so far
+Iteration 108827 (of 130325): max relative diff=0.000253, 40.12 sec so far
+Iteration 115327 (of 130325): max relative diff=0.000253, 45.14 sec so far
+Iteration 121557 (of 130325): max relative diff=0.000253, 50.16 sec so far
+Iteration 127795 (of 130325): max relative diff=0.000253, 55.17 sec so far
+
+Iterative method: 130325 iterations in 57.31 seconds (average 0.000439, setup 0.11)
+
+Value in the initial state: 0.006338119483680492
+
+Time for model checking: 59.726 seconds.
+
+Result: 0.006338119483680492
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2.5
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2.5
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 16 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 59 iterations in 0.39 seconds (average 0.006627, setup 0.00)
+
+Time for model construction: 0.436 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      9150 (1 initial)
+Transitions: 25676
+
+Rate matrix: 17722 nodes (8 terminal), 25676 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2131.800000 x 10.000000 = 21318.000000
+Fox-Glynn: left = 20293, right = 22559
+
+Starting iterations...
+
+Iterative method: 22559 iterations in 3.23 seconds (average 0.000136, setup 0.17)
+
+Value in the initial state: 0.974218590463956
+
+Time for model checking: 3.313 seconds.
+
+Result: 0.974218590463956
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2131.800000 x 60.000000 = 127908.000000
+Fox-Glynn: left = 125402, right = 130945
+
+Starting iterations...
+Iteration 37226 (of 130945): max relative diff=0.000001, 5.01 sec so far
+
+Steady state detected at iteration 45843
+
+Iterative method: 45843 iterations in 6.20 seconds (average 0.000133, setup 0.12)
+
+Value in the initial state: 0.9997333033764861
+
+Time for model checking: 6.434 seconds.
+
+Result: 0.9997333033764861
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2.5
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2131.800000 x 10.000000 = 21318.000000
+Fox-Glynn: left = 20293, right = 22559
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.14 seconds (average 0.000000, setup 0.14)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.14 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2131.800000 x 60.000000 = 127908.000000
+Fox-Glynn: left = 125402, right = 130945
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.16 seconds (average 0.000000, setup 0.16)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.148 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2131.800000 x 10.000000 = 21318.000000
+Fox-Glynn: left = 20293, right = 22559
+
+Starting iterations...
+Iteration 21804 (of 22559): max relative diff=0.019467, 5.01 sec so far
+
+Iterative method: 22559 iterations in 5.30 seconds (average 0.000228, setup 0.16)
+
+Value in the initial state: 2.9666861412037555
+
+Time for model checking: 5.512 seconds.
+
+Result: 2.9666861412037555
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2131.800000 x 60.000000 = 127908.000000
+Fox-Glynn: left = 125402, right = 130945
+
+Starting iterations...
+Iteration 21269 (of 130945): max relative diff=0.019467, 5.02 sec so far
+Iteration 39661 (of 130945): max relative diff=0.000214, 10.03 sec so far
+Iteration 52171 (of 130945): max relative diff=0.000214, 15.05 sec so far
+Iteration 64320 (of 130945): max relative diff=0.000214, 20.06 sec so far
+Iteration 76408 (of 130945): max relative diff=0.000214, 25.08 sec so far
+Iteration 88742 (of 130945): max relative diff=0.000214, 30.09 sec so far
+Iteration 101336 (of 130945): max relative diff=0.000214, 35.11 sec so far
+Iteration 113711 (of 130945): max relative diff=0.000214, 40.12 sec so far
+Iteration 124671 (of 130945): max relative diff=0.000214, 45.14 sec so far
+
+Iterative method: 130945 iterations in 48.08 seconds (average 0.000366, setup 0.11)
+
+Value in the initial state: 3.022496247165198
+
+Time for model checking: 49.828 seconds.
+
+Result: 3.022496247165198
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2131.800000 x 10.000000 = 21318.000000
+Fox-Glynn: left = 20293, right = 22559
+
+Starting iterations...
+
+Iterative method: 22559 iterations in 4.28 seconds (average 0.000183, setup 0.16)
+
+Value in the initial state: 0.0074377419785477085
+
+Time for model checking: 4.426 seconds.
+
+Result: 0.0074377419785477085
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=2.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2131.800000 x 60.000000 = 127908.000000
+Fox-Glynn: left = 125402, right = 130945
+
+Starting iterations...
+Iteration 27119 (of 130945): max relative diff=0.023454, 5.01 sec so far
+Iteration 34456 (of 130945): max relative diff=0.000214, 10.03 sec so far
+Iteration 40522 (of 130945): max relative diff=0.000214, 15.05 sec so far
+Iteration 46831 (of 130945): max relative diff=0.000214, 20.06 sec so far
+Iteration 52704 (of 130945): max relative diff=0.000214, 25.08 sec so far
+Iteration 58251 (of 130945): max relative diff=0.000214, 30.09 sec so far
+Iteration 64084 (of 130945): max relative diff=0.000214, 35.11 sec so far
+Iteration 69550 (of 130945): max relative diff=0.000214, 40.12 sec so far
+Iteration 75090 (of 130945): max relative diff=0.000214, 45.14 sec so far
+Iteration 80461 (of 130945): max relative diff=0.000214, 50.16 sec so far
+Iteration 85824 (of 130945): max relative diff=0.000214, 55.17 sec so far
+Iteration 91476 (of 130945): max relative diff=0.000214, 60.19 sec so far
+Iteration 97562 (of 130945): max relative diff=0.000214, 65.20 sec so far
+Iteration 104142 (of 130945): max relative diff=0.000214, 70.22 sec so far
+Iteration 110283 (of 130945): max relative diff=0.000214, 75.23 sec so far
+Iteration 116268 (of 130945): max relative diff=0.000214, 80.25 sec so far
+Iteration 122884 (of 130945): max relative diff=0.000214, 85.27 sec so far
+Iteration 129053 (of 130945): max relative diff=0.000214, 90.28 sec so far
+
+Iterative method: 130945 iterations in 91.88 seconds (average 0.000700, setup 0.16)
+
+Value in the initial state: 0.007560682811008727
+
+Time for model checking: 96.731 seconds.
+
+Result: 0.007560682811008727
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 16 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 59 iterations in 0.30 seconds (average 0.005034, setup 0.00)
+
+Time for model construction: 0.351 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      9150 (1 initial)
+Transitions: 25676
+
+Rate matrix: 17722 nodes (8 terminal), 25676 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2142.000000 x 10.000000 = 21420.000000
+Fox-Glynn: left = 20393, right = 22664
+
+Starting iterations...
+
+Iterative method: 22664 iterations in 2.84 seconds (average 0.000120, setup 0.12)
+
+Value in the initial state: 0.9601880963869388
+
+Time for model checking: 3.012 seconds.
+
+Result: 0.9601880963869388
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2142.000000 x 60.000000 = 128520.000000
+Fox-Glynn: left = 126008, right = 131564
+
+Starting iterations...
+Iteration 42434 (of 131564): max relative diff=0.000000, 5.01 sec so far
+
+Steady state detected at iteration 50403
+
+Iterative method: 50403 iterations in 6.28 seconds (average 0.000122, setup 0.16)
+
+Value in the initial state: 0.9996580362772003
+
+Time for model checking: 6.667 seconds.
+
+Result: 0.9996580362772003
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2142.000000 x 10.000000 = 21420.000000
+Fox-Glynn: left = 20393, right = 22664
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.16 seconds (average 0.000000, setup 0.16)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.15 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2142.000000 x 60.000000 = 128520.000000
+Fox-Glynn: left = 126008, right = 131564
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.12 seconds (average 0.000000, setup 0.12)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.151 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2142.000000 x 10.000000 = 21420.000000
+Fox-Glynn: left = 20393, right = 22664
+
+Starting iterations...
+Iteration 20375 (of 22664): max relative diff=0.019374, 5.02 sec so far
+
+Iterative method: 22664 iterations in 5.67 seconds (average 0.000245, setup 0.12)
+
+Value in the initial state: 3.2207805772480205
+
+Time for model checking: 5.892 seconds.
+
+Result: 3.2207805772480205
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2142.000000 x 60.000000 = 128520.000000
+Fox-Glynn: left = 126008, right = 131564
+
+Starting iterations...
+Iteration 20816 (of 131564): max relative diff=0.019374, 5.02 sec so far
+Iteration 38989 (of 131564): max relative diff=0.027027, 10.03 sec so far
+Iteration 50368 (of 131564): max relative diff=0.000184, 15.05 sec so far
+Iteration 62290 (of 131564): max relative diff=0.000184, 20.06 sec so far
+Iteration 75095 (of 131564): max relative diff=0.000184, 25.08 sec so far
+Iteration 87620 (of 131564): max relative diff=0.000184, 30.09 sec so far
+Iteration 99858 (of 131564): max relative diff=0.000184, 35.11 sec so far
+Iteration 112239 (of 131564): max relative diff=0.000184, 40.12 sec so far
+Iteration 123933 (of 131564): max relative diff=0.000184, 45.14 sec so far
+
+Iterative method: 131564 iterations in 48.06 seconds (average 0.000364, setup 0.12)
+
+Value in the initial state: 3.319146048404607
+
+Time for model checking: 50.846 seconds.
+
+Result: 3.319146048404607
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2142.000000 x 10.000000 = 21420.000000
+Fox-Glynn: left = 20393, right = 22664
+
+Starting iterations...
+
+Iterative method: 22664 iterations in 4.20 seconds (average 0.000180, setup 0.12)
+
+Value in the initial state: 0.00864346415186726
+
+Time for model checking: 4.366 seconds.
+
+Result: 0.00864346415186726
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2142.000000 x 60.000000 = 128520.000000
+Fox-Glynn: left = 126008, right = 131564
+
+Starting iterations...
+Iteration 25170 (of 131564): max relative diff=0.028011, 5.02 sec so far
+Iteration 30954 (of 131564): max relative diff=0.000184, 10.03 sec so far
+Iteration 36965 (of 131564): max relative diff=0.000184, 15.05 sec so far
+Iteration 42765 (of 131564): max relative diff=0.000184, 20.06 sec so far
+Iteration 48687 (of 131564): max relative diff=0.000184, 25.08 sec so far
+Iteration 54663 (of 131564): max relative diff=0.000184, 30.09 sec so far
+Iteration 60998 (of 131564): max relative diff=0.000184, 35.11 sec so far
+Iteration 67459 (of 131564): max relative diff=0.000184, 40.12 sec so far
+Iteration 73953 (of 131564): max relative diff=0.000184, 45.14 sec so far
+Iteration 80184 (of 131564): max relative diff=0.000184, 50.16 sec so far
+Iteration 86275 (of 131564): max relative diff=0.000184, 55.17 sec so far
+Iteration 92600 (of 131564): max relative diff=0.000184, 60.19 sec so far
+Iteration 98871 (of 131564): max relative diff=0.000184, 65.20 sec so far
+Iteration 104958 (of 131564): max relative diff=0.000184, 70.22 sec so far
+Iteration 111020 (of 131564): max relative diff=0.000184, 75.23 sec so far
+Iteration 116915 (of 131564): max relative diff=0.000184, 80.25 sec so far
+Iteration 123406 (of 131564): max relative diff=0.000184, 85.27 sec so far
+Iteration 129287 (of 131564): max relative diff=0.000184, 90.28 sec so far
+
+Iterative method: 131564 iterations in 92.41 seconds (average 0.000702, setup 0.09)
+
+Value in the initial state: 0.008872855584803498
+
+Time for model checking: 97.136 seconds.
+
+Result: 0.008872855584803498
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3.5
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3.5
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 16 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 59 iterations in 0.34 seconds (average 0.005831, setup 0.00)
+
+Time for model construction: 0.444 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      9150 (1 initial)
+Transitions: 25676
+
+Rate matrix: 17722 nodes (8 terminal), 25676 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2152.200000 x 10.000000 = 21522.000000
+Fox-Glynn: left = 20492, right = 22769
+
+Starting iterations...
+
+Iterative method: 22769 iterations in 3.27 seconds (average 0.000139, setup 0.11)
+
+Value in the initial state: 0.9431252441738903
+
+Time for model checking: 3.368 seconds.
+
+Result: 0.9431252441738903
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2152.200000 x 60.000000 = 129132.000000
+Fox-Glynn: left = 126613, right = 132182
+
+Starting iterations...
+Iteration 37573 (of 132182): max relative diff=0.000002, 5.02 sec so far
+
+Steady state detected at iteration 55141
+
+Iterative method: 55141 iterations in 7.61 seconds (average 0.000136, setup 0.12)
+
+Value in the initial state: 0.9995753821981037
+
+Time for model checking: 8.051 seconds.
+
+Result: 0.9995753821981037
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3.5
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2152.200000 x 10.000000 = 21522.000000
+Fox-Glynn: left = 20492, right = 22769
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.12 seconds (average 0.000000, setup 0.12)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.122 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2152.200000 x 60.000000 = 129132.000000
+Fox-Glynn: left = 126613, right = 132182
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.14 seconds (average 0.000000, setup 0.14)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.148 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2152.200000 x 10.000000 = 21522.000000
+Fox-Glynn: left = 20492, right = 22769
+
+Starting iterations...
+Iteration 22606 (of 22769): max relative diff=0.019283, 5.02 sec so far
+
+Iterative method: 22769 iterations in 5.20 seconds (average 0.000222, setup 0.16)
+
+Value in the initial state: 3.4682298522287884
+
+Time for model checking: 5.331 seconds.
+
+Result: 3.4682298522287884
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2152.200000 x 60.000000 = 129132.000000
+Fox-Glynn: left = 126613, right = 132182
+
+Starting iterations...
+Iteration 22240 (of 132182): max relative diff=0.019283, 5.02 sec so far
+Iteration 40838 (of 132182): max relative diff=0.000161, 10.03 sec so far
+Iteration 52471 (of 132182): max relative diff=0.000161, 15.05 sec so far
+Iteration 65373 (of 132182): max relative diff=0.000161, 20.06 sec so far
+Iteration 76615 (of 132182): max relative diff=0.000161, 25.08 sec so far
+Iteration 88230 (of 132182): max relative diff=0.000161, 30.09 sec so far
+Iteration 100290 (of 132182): max relative diff=0.000161, 35.11 sec so far
+Iteration 112054 (of 132182): max relative diff=0.000161, 40.12 sec so far
+Iteration 124219 (of 132182): max relative diff=0.000161, 45.14 sec so far
+
+Iterative method: 132182 iterations in 48.52 seconds (average 0.000366, setup 0.11)
+
+Value in the initial state: 3.6267878462342633
+
+Time for model checking: 50.94 seconds.
+
+Result: 3.6267878462342633
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2152.200000 x 10.000000 = 21522.000000
+Fox-Glynn: left = 20492, right = 22769
+
+Starting iterations...
+Iteration 22674 (of 22769): max relative diff=0.000161, 5.01 sec so far
+
+Iterative method: 22769 iterations in 5.20 seconds (average 0.000224, setup 0.11)
+
+Value in the initial state: 0.009889685178902256
+
+Time for model checking: 5.602 seconds.
+
+Result: 0.009889685178902256
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=3.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2152.200000 x 60.000000 = 129132.000000
+Fox-Glynn: left = 126613, right = 132182
+
+Starting iterations...
+Iteration 22628 (of 132182): max relative diff=0.000161, 5.02 sec so far
+Iteration 28185 (of 132182): max relative diff=0.000161, 10.03 sec so far
+Iteration 33812 (of 132182): max relative diff=0.000161, 15.05 sec so far
+Iteration 39878 (of 132182): max relative diff=0.000161, 20.06 sec so far
+Iteration 45744 (of 132182): max relative diff=0.000161, 25.08 sec so far
+Iteration 51916 (of 132182): max relative diff=0.000161, 30.09 sec so far
+Iteration 58131 (of 132182): max relative diff=0.000161, 35.11 sec so far
+Iteration 64529 (of 132182): max relative diff=0.000161, 40.12 sec so far
+Iteration 70518 (of 132182): max relative diff=0.000161, 45.14 sec so far
+Iteration 77327 (of 132182): max relative diff=0.000161, 50.16 sec so far
+Iteration 84507 (of 132182): max relative diff=0.000161, 55.17 sec so far
+Iteration 91091 (of 132182): max relative diff=0.000161, 60.19 sec so far
+Iteration 97928 (of 132182): max relative diff=0.000161, 65.20 sec so far
+Iteration 103758 (of 132182): max relative diff=0.000161, 70.22 sec so far
+Iteration 109700 (of 132182): max relative diff=0.000161, 75.23 sec so far
+Iteration 115993 (of 132182): max relative diff=0.000161, 80.25 sec so far
+Iteration 122555 (of 132182): max relative diff=0.000161, 85.27 sec so far
+Iteration 129316 (of 132182): max relative diff=0.000161, 90.28 sec so far
+
+Iterative method: 132182 iterations in 92.58 seconds (average 0.000700, setup 0.11)
+
+Value in the initial state: 0.010280139035825869
+
+Time for model checking: 96.614 seconds.
+
+Result: 0.010280139035825869
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 16 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 59 iterations in 0.27 seconds (average 0.004508, setup 0.00)
+
+Time for model construction: 0.359 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      9150 (1 initial)
+Transitions: 25676
+
+Rate matrix: 17722 nodes (8 terminal), 25676 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=57, compact] [18.3 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2162.400000 x 10.000000 = 21624.000000
+Fox-Glynn: left = 20592, right = 22874
+
+Starting iterations...
+
+Iterative method: 22874 iterations in 3.17 seconds (average 0.000134, setup 0.11)
+
+Value in the initial state: 0.9235837877262217
+
+Time for model checking: 3.235 seconds.
+
+Result: 0.9235837877262217
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=57, compact] [18.3 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2162.400000 x 60.000000 = 129744.000000
+Fox-Glynn: left = 127220, right = 132802
+
+Starting iterations...
+Iteration 38983 (of 132802): max relative diff=0.000002, 5.01 sec so far
+
+Steady state detected at iteration 60017
+
+Iterative method: 60017 iterations in 7.89 seconds (average 0.000129, setup 0.14)
+
+Value in the initial state: 0.9994863403303638
+
+Time for model checking: 8.416 seconds.
+
+Result: 0.9994863403303638
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=56, compact] [18.3 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2162.400000 x 10.000000 = 21624.000000
+Fox-Glynn: left = 20592, right = 22874
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.14 seconds (average 0.000000, setup 0.14)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.164 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=56, compact] [18.3 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2162.400000 x 60.000000 = 129744.000000
+Fox-Glynn: left = 127220, right = 132802
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.19 seconds (average 0.000000, setup 0.19)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.161 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=56, compact] [18.3 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2162.400000 x 10.000000 = 21624.000000
+Fox-Glynn: left = 20592, right = 22874
+
+Starting iterations...
+Iteration 21202 (of 22874): max relative diff=0.019192, 5.02 sec so far
+
+Iterative method: 22874 iterations in 5.44 seconds (average 0.000231, setup 0.16)
+
+Value in the initial state: 3.705356366347737
+
+Time for model checking: 5.743 seconds.
+
+Result: 3.705356366347737
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=56, compact] [18.3 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2162.400000 x 60.000000 = 129744.000000
+Fox-Glynn: left = 127220, right = 132802
+
+Starting iterations...
+Iteration 20423 (of 132802): max relative diff=0.019192, 5.02 sec so far
+Iteration 39040 (of 132802): max relative diff=0.018513, 10.03 sec so far
+Iteration 50643 (of 132802): max relative diff=0.000142, 15.05 sec so far
+Iteration 62516 (of 132802): max relative diff=0.000142, 20.06 sec so far
+Iteration 74834 (of 132802): max relative diff=0.000142, 25.08 sec so far
+Iteration 87744 (of 132802): max relative diff=0.000142, 30.09 sec so far
+Iteration 100422 (of 132802): max relative diff=0.000142, 35.11 sec so far
+Iteration 113589 (of 132802): max relative diff=0.000142, 40.12 sec so far
+Iteration 124391 (of 132802): max relative diff=0.000142, 45.14 sec so far
+
+Iterative method: 132802 iterations in 49.14 seconds (average 0.000369, setup 0.14)
+
+Value in the initial state: 3.9432710364746866
+
+Time for model checking: 51.207 seconds.
+
+Result: 3.9432710364746866
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=56, compact] [18.3 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2162.400000 x 10.000000 = 21624.000000
+Fox-Glynn: left = 20592, right = 22874
+
+Starting iterations...
+Iteration 20274 (of 22874): max relative diff=0.000142, 5.02 sec so far
+
+Iterative method: 22874 iterations in 7.09 seconds (average 0.000305, setup 0.12)
+
+Value in the initial state: 0.011169202696509653
+
+Time for model checking: 7.547 seconds.
+
+Result: 0.011169202696509653
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=56, compact] [18.3 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2162.400000 x 60.000000 = 129744.000000
+Fox-Glynn: left = 127220, right = 132802
+
+Starting iterations...
+Iteration 21007 (of 132802): max relative diff=0.000142, 5.01 sec so far
+Iteration 26704 (of 132802): max relative diff=0.000142, 10.03 sec so far
+Iteration 32259 (of 132802): max relative diff=0.000142, 15.05 sec so far
+Iteration 38185 (of 132802): max relative diff=0.000142, 20.06 sec so far
+Iteration 44454 (of 132802): max relative diff=0.000142, 25.08 sec so far
+Iteration 50876 (of 132802): max relative diff=0.000142, 30.09 sec so far
+Iteration 57312 (of 132802): max relative diff=0.000142, 35.11 sec so far
+Iteration 63995 (of 132802): max relative diff=0.000142, 40.12 sec so far
+Iteration 70478 (of 132802): max relative diff=0.000142, 45.14 sec so far
+Iteration 77592 (of 132802): max relative diff=0.000142, 50.16 sec so far
+Iteration 84679 (of 132802): max relative diff=0.000142, 55.17 sec so far
+Iteration 91562 (of 132802): max relative diff=0.000142, 60.19 sec so far
+Iteration 98900 (of 132802): max relative diff=0.000142, 65.20 sec so far
+Iteration 106302 (of 132802): max relative diff=0.000142, 70.22 sec so far
+Iteration 113496 (of 132802): max relative diff=0.000142, 75.23 sec so far
+Iteration 121162 (of 132802): max relative diff=0.000142, 80.25 sec so far
+Iteration 128856 (of 132802): max relative diff=0.000142, 85.27 sec so far
+
+Iterative method: 132802 iterations in 87.92 seconds (average 0.000661, setup 0.14)
+
+Value in the initial state: 0.011786563314810669
+
+Time for model checking: 90.933 seconds.
+
+Result: 0.011786563314810669
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4.5
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4.5
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 16 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 59 iterations in 0.27 seconds (average 0.004508, setup 0.00)
+
+Time for model construction: 0.364 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      9150 (1 initial)
+Transitions: 25676
+
+Rate matrix: 17722 nodes (8 terminal), 25676 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2172.600000 x 10.000000 = 21726.000000
+Fox-Glynn: left = 20692, right = 22979
+
+Starting iterations...
+
+Iterative method: 22979 iterations in 2.83 seconds (average 0.000118, setup 0.12)
+
+Value in the initial state: 0.9021588193401577
+
+Time for model checking: 2.872 seconds.
+
+Result: 0.9021588193401577
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2172.600000 x 60.000000 = 130356.000000
+Fox-Glynn: left = 127826, right = 133422
+
+Starting iterations...
+Iteration 44862 (of 133422): max relative diff=0.000001, 5.01 sec so far
+
+Steady state detected at iteration 65007
+
+Iterative method: 65007 iterations in 7.62 seconds (average 0.000116, setup 0.11)
+
+Value in the initial state: 0.9993917080040217
+
+Time for model checking: 8.019 seconds.
+
+Result: 0.9993917080040217
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4.5
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2172.600000 x 10.000000 = 21726.000000
+Fox-Glynn: left = 20692, right = 22979
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.11 seconds (average 0.000000, setup 0.11)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.127 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2172.600000 x 60.000000 = 130356.000000
+Fox-Glynn: left = 127826, right = 133422
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.12 seconds (average 0.000000, setup 0.12)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.128 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2172.600000 x 10.000000 = 21726.000000
+Fox-Glynn: left = 20692, right = 22979
+
+Starting iterations...
+
+Iterative method: 22979 iterations in 4.52 seconds (average 0.000192, setup 0.11)
+
+Value in the initial state: 3.929962622138158
+
+Time for model checking: 4.638 seconds.
+
+Result: 3.929962622138158
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2172.600000 x 60.000000 = 130356.000000
+Fox-Glynn: left = 127826, right = 133422
+
+Starting iterations...
+Iteration 25404 (of 133422): max relative diff=0.019102, 5.02 sec so far
+Iteration 43621 (of 133422): max relative diff=0.000127, 10.03 sec so far
+Iteration 57438 (of 133422): max relative diff=0.000127, 15.05 sec so far
+Iteration 70692 (of 133422): max relative diff=0.000127, 20.06 sec so far
+Iteration 83354 (of 133422): max relative diff=0.000127, 25.08 sec so far
+Iteration 96116 (of 133422): max relative diff=0.000127, 30.09 sec so far
+Iteration 108040 (of 133422): max relative diff=0.000127, 35.11 sec so far
+Iteration 119948 (of 133422): max relative diff=0.000127, 40.12 sec so far
+Iteration 132689 (of 133422): max relative diff=0.000127, 45.14 sec so far
+
+Iterative method: 133422 iterations in 45.55 seconds (average 0.000340, setup 0.12)
+
+Value in the initial state: 4.267102842035927
+
+Time for model checking: 47.455 seconds.
+
+Result: 4.267102842035927
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4.5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2172.600000 x 10.000000 = 21726.000000
+Fox-Glynn: left = 20692, right = 22979
+
+Starting iterations...
+Iteration 19003 (of 22979): max relative diff=0.000127, 5.01 sec so far
+
+Iterative method: 22979 iterations in 8.03 seconds (average 0.000343, setup 0.14)
+
+Value in the initial state: 0.012475184368153886
+
+Time for model checking: 8.332 seconds.
+
+Result: 0.012475184368153886
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=4.5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2172.600000 x 60.000000 = 130356.000000
+Fox-Glynn: left = 127826, right = 133422
+
+Starting iterations...
+Iteration 20241 (of 133422): max relative diff=0.000127, 5.02 sec so far
+Iteration 27321 (of 133422): max relative diff=0.000127, 10.03 sec so far
+Iteration 34151 (of 133422): max relative diff=0.000127, 15.05 sec so far
+Iteration 40256 (of 133422): max relative diff=0.000127, 20.06 sec so far
+Iteration 46265 (of 133422): max relative diff=0.000127, 25.08 sec so far
+Iteration 52161 (of 133422): max relative diff=0.000127, 30.09 sec so far
+Iteration 58184 (of 133422): max relative diff=0.000127, 35.11 sec so far
+Iteration 64541 (of 133422): max relative diff=0.000127, 40.12 sec so far
+Iteration 71353 (of 133422): max relative diff=0.000127, 45.14 sec so far
+Iteration 77800 (of 133422): max relative diff=0.000127, 50.16 sec so far
+Iteration 83723 (of 133422): max relative diff=0.000127, 55.17 sec so far
+Iteration 90072 (of 133422): max relative diff=0.000127, 60.19 sec so far
+Iteration 96022 (of 133422): max relative diff=0.000127, 65.20 sec so far
+Iteration 104316 (of 133422): max relative diff=0.000127, 70.22 sec so far
+
+Iterative method: 133422 iterations in 73.80 seconds (average 0.000552, setup 0.12)
+
+Value in the initial state: 0.013395270619913857
+
+Time for model checking: 77.131 seconds.
+
+Result: 0.013395270619913857
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=5
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=5
+
+Warning: Guard for command 13 of module "initiator" is never satisfied.
+
+Warning: Guard for command 16 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 59 iterations in 0.17 seconds (average 0.002915, setup 0.00)
+
+Time for model construction: 0.185 seconds.
+
+Warning: Deadlocks detected and fixed in 19 states
+
+Type:        CTMC
+States:      9150 (1 initial)
+Transitions: 25676
+
+Rate matrix: 17722 nodes (8 terminal), 25676 minterms, vars: 31r/31c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2182.800000 x 10.000000 = 21828.000000
+Fox-Glynn: left = 20791, right = 23084
+
+Starting iterations...
+
+Iterative method: 23084 iterations in 3.06 seconds (average 0.000129, setup 0.08)
+
+Value in the initial state: 0.8794099343411891
+
+Time for model checking: 3.155 seconds.
+
+Result: 0.8794099343411891
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9098 of 9150 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26065] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.0 KB]
+Creating vector for diagonals... [dist=65, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2182.800000 x 60.000000 = 130968.000000
+Fox-Glynn: left = 128432, right = 134041
+
+Starting iterations...
+Iteration 33835 (of 134041): max relative diff=0.000006, 5.02 sec so far
+
+Steady state detected at iteration 70095
+
+Iterative method: 70095 iterations in 9.39 seconds (average 0.000132, setup 0.12)
+
+Value in the initial state: 0.9992920375048423
+
+Time for model checking: 9.948 seconds.
+
+Result: 0.9992920375048423
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=5
+Property constants: T=10
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2182.800000 x 10.000000 = 21828.000000
+Fox-Glynn: left = 20791, right = 23084
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.08 seconds (average 0.000000, setup 0.08)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.069 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "solving_forged" ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 9150 of 9150 (100.0%)
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2182.800000 x 60.000000 = 130968.000000
+Fox-Glynn: left = 128432, right = 134041
+
+Starting iterations...
+
+Steady state detected at iteration 1
+
+Iterative method: 1 iterations in 0.06 seconds (average 0.000000, setup 0.06)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.061 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2182.800000 x 10.000000 = 21828.000000
+Fox-Glynn: left = 20791, right = 23084
+
+Starting iterations...
+
+Iterative method: 23084 iterations in 1.30 seconds (average 0.000054, setup 0.06)
+
+Value in the initial state: 4.140901551068184
+
+Time for model checking: 1.296 seconds.
+
+Result: 4.140901551068184
+
+---------------------------------------------------------------------
+
+Model checking: R{"init_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2182.800000 x 60.000000 = 130968.000000
+Fox-Glynn: left = 128432, right = 134041
+
+Starting iterations...
+Iteration 77844 (of 134041): max relative diff=0.000115, 5.02 sec so far
+
+Iterative method: 134041 iterations in 9.30 seconds (average 0.000069, setup 0.06)
+
+Value in the initial state: 4.5972011186268595
+
+Time for model checking: 9.361 seconds.
+
+Result: 4.5972011186268595
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=5
+Property constants: T=10
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2182.800000 x 10.000000 = 21828.000000
+Fox-Glynn: left = 20791, right = 23084
+
+Starting iterations...
+
+Iterative method: 23084 iterations in 1.74 seconds (average 0.000072, setup 0.06)
+
+Value in the initial state: 0.013801535924895695
+
+Time for model checking: 1.737 seconds.
+
+Result: 0.013801535924895695
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ C<=T ]
+Model constants: attack=1,defense=2,d_f=28,D_max=24,ratio_F=5
+Property constants: T=60
+
+Computing rewards...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=31, nodes=26355] [1.2 MB]
+Adding explicit sparse matrices... [levels=31, num=1, compact] [109.3 KB]
+Creating vector for diagonals... [dist=64, compact] [18.4 KB]
+Allocating iteration vectors... [3 x 71.5 KB]
+TOTAL: [1.5 MB]
+
+Uniformisation: q.t = 2182.800000 x 60.000000 = 130968.000000
+Fox-Glynn: left = 128432, right = 134041
+
+Starting iterations...
+Iteration 50040 (of 134041): max relative diff=0.000115, 5.02 sec so far
+Iteration 88064 (of 134041): max relative diff=0.000115, 10.03 sec so far
+Iteration 94022 (of 134041): max relative diff=0.000115, 15.05 sec so far
+Iteration 100119 (of 134041): max relative diff=0.000115, 20.06 sec so far
+Iteration 105533 (of 134041): max relative diff=0.000115, 25.08 sec so far
+Iteration 110940 (of 134041): max relative diff=0.000115, 30.09 sec so far
+Iteration 116545 (of 134041): max relative diff=0.000115, 35.11 sec so far
+Iteration 122101 (of 134041): max relative diff=0.000115, 40.12 sec so far
+Iteration 127814 (of 134041): max relative diff=0.000115, 45.14 sec so far
+Iteration 133799 (of 134041): max relative diff=0.000115, 50.16 sec so far
+
+Iterative method: 134041 iterations in 50.41 seconds (average 0.000376, setup 0.06)
+
+Value in the initial state: 0.015108833057792955
+
+Time for model checking: 52.446 seconds.
+
+Result: 0.015108833057792955
+
+Exporting results as list (CSV) to file "experiments\E2_ratio.csv"...
+
+---------------------------------------------------------------------
+
+Note: There were 100 warnings during computation.
+

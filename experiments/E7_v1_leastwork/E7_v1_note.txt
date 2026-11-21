@@ -1,0 +1,5 @@
+E7 version 1 (least-work rule: of two puzzles solve only the cheaper one).
+Extra point computed 2026-11-20 in the Linux VM with the explicit engine (PRISM 4.10.1):
+ikev2_rq1_wait_v1.sm, attack=1,defense=2,D_max=255,ratio_F=2,d_f=16,w_I=0.1,T=10
+P=? [ F<=10 "established" ] = 0.42373514046659155  ->  P(no SA within 10 s) = 0.576
+This shows the weakness of version 1 cited in Sect. 6 of the paper; version 2 (experiments/E7_model_v2/) and the current ikev2_rq1_wait.sm (f_type=0, multi=0) give 0.0028 for the same point.

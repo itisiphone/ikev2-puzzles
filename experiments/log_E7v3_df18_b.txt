@@ -1,0 +1,230 @@
+PRISM
+=====
+
+Version: 4.10.1
+Date: Sat Nov 21 12:22:42 2026
+Memory limits: cudd=1g, java(heap)=7.9g
+Command line: prism ikev2_rq1_wait.sm 'experiments\ikev2_rq1_wait.props' -const 'attack=1,defense=2,f_type=0,multi=0,d_f=18,D_max=255,ratio_F=2,w_I=0.25:0.25:0.5,T=10:50:60' -exportresults 'experiments\E7v3_df18_b.csv:csv'
+
+Parsing PRISM model file "ikev2_rq1_wait.sm"...
+
+Type:        CTMC
+Modules:     medium attacker initiator responder
+Actions:     [i_send_init] [i_send_fake] [i_send_cookie] [i_send_ps] [i_send_auth] [i_send_badauth] [r_send_cookie] [r_send_puzzle] [r_send_initok] [r_send_authok] [deliver_IR] [deliver_RI] [a_inject] [i_wait] [i_tick] [i_timeout] [i_giveup] [i_parse] [i_solve] [r_drop_full] [r_drop_auth] [r_expire]
+Variables:   m_IR m_RI armed s_I in_I bad sol sd ps fk pend po tph r_I in_R rs h
+Labels:      "established" "init_unavail" "done" "solving_forged" "resp_full"
+Rewards:     "init_cpu" "att_cpu" "resp_cpu" "forged_solved" "time"
+
+Parsing properties file "experiments\ikev2_rq1_wait.props"...
+
+1 property:
+(1) P=? [ F<=T "established" ]
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=18,D_max=255,ratio_F=2,f_type=0,multi=0,w_I=0.25
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=18,D_max=255,ratio_F=2,f_type=0,multi=0,w_I=0.25
+
+Warning: Guard for command 17 of module "initiator" is never satisfied.
+
+Warning: Guard for command 18 of module "initiator" is never satisfied.
+
+Warning: Guard for command 19 of module "initiator" is never satisfied.
+
+Warning: Guard for command 20 of module "initiator" is never satisfied.
+
+Warning: Guard for command 21 of module "initiator" is never satisfied.
+
+Warning: Guard for command 28 of module "initiator" is never satisfied.
+
+Warning: Guard for command 33 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 79 iterations in 0.75 seconds (average 0.009494, setup 0.00)
+
+Time for model construction: 0.861 seconds.
+
+Warning: Deadlocks detected and fixed in 53 states
+
+Type:        CTMC
+States:      33881 (1 initial)
+Transitions: 92849
+
+Rate matrix: 32078 nodes (8 terminal), 92849 minterms, vars: 34r/34c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 33690 of 33881 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=34, nodes=52358] [2.4 MB]
+Adding explicit sparse matrices... [levels=34, num=1, compact] [394.6 KB]
+Creating vector for diagonals... [dist=59, compact] [66.6 KB]
+Allocating iteration vectors... [3 x 264.7 KB]
+TOTAL: [3.6 MB]
+
+Uniformisation: q.t = 2121.600000 x 10.000000 = 21216.000000
+Fox-Glynn: left = 20194, right = 22454
+
+Starting iterations...
+Iteration 15348 (of 22454): max relative diff=0.000083, 5.02 sec so far
+
+Iterative method: 22454 iterations in 8.56 seconds (average 0.000367, setup 0.33)
+
+Value in the initial state: 0.9861117460742678
+
+Time for model checking: 8.962 seconds.
+
+Result: 0.9861117460742678
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=18,D_max=255,ratio_F=2,f_type=0,multi=0,w_I=0.25
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 33690 of 33881 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=34, nodes=52358] [2.4 MB]
+Adding explicit sparse matrices... [levels=34, num=1, compact] [394.6 KB]
+Creating vector for diagonals... [dist=59, compact] [66.6 KB]
+Allocating iteration vectors... [3 x 264.7 KB]
+TOTAL: [3.6 MB]
+
+Uniformisation: q.t = 2121.600000 x 60.000000 = 127296.000000
+Fox-Glynn: left = 124796, right = 130325
+
+Starting iterations...
+Iteration 11281 (of 130325): max relative diff=0.000234, 5.01 sec so far
+Iteration 22707 (of 130325): max relative diff=0.000009, 10.03 sec so far
+Iteration 34960 (of 130325): max relative diff=0.000000, 15.05 sec so far
+
+Steady state detected at iteration 40484
+
+Iterative method: 40484 iterations in 18.31 seconds (average 0.000437, setup 0.61)
+
+Value in the initial state: 0.9998513521993557
+
+Time for model checking: 19.616 seconds.
+
+Result: 0.9998513521993557
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=18,D_max=255,ratio_F=2,f_type=0,multi=0,w_I=0.5
+Property constants: T=10
+
+Building model (engine:symbolic)...
+Model constants: attack=1,defense=2,d_f=18,D_max=255,ratio_F=2,f_type=0,multi=0,w_I=0.5
+
+Warning: Guard for command 17 of module "initiator" is never satisfied.
+
+Warning: Guard for command 18 of module "initiator" is never satisfied.
+
+Warning: Guard for command 19 of module "initiator" is never satisfied.
+
+Warning: Guard for command 20 of module "initiator" is never satisfied.
+
+Warning: Guard for command 21 of module "initiator" is never satisfied.
+
+Warning: Guard for command 28 of module "initiator" is never satisfied.
+
+Warning: Guard for command 33 of module "initiator" is never satisfied.
+
+Warning: Guard for command 5 of module "responder" is never satisfied.
+
+Warning: Guard for command 2 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 79 iterations in 1.11 seconds (average 0.014038, setup 0.00)
+
+Time for model construction: 1.343 seconds.
+
+Warning: Deadlocks detected and fixed in 53 states
+
+Type:        CTMC
+States:      33881 (1 initial)
+Transitions: 92849
+
+Rate matrix: 32078 nodes (8 terminal), 92849 minterms, vars: 34r/34c
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 33690 of 33881 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=34, nodes=52358] [2.4 MB]
+Adding explicit sparse matrices... [levels=34, num=1, compact] [394.6 KB]
+Creating vector for diagonals... [dist=53, compact] [66.6 KB]
+Allocating iteration vectors... [3 x 264.7 KB]
+TOTAL: [3.6 MB]
+
+Uniformisation: q.t = 2121.600000 x 10.000000 = 21216.000000
+Fox-Glynn: left = 20194, right = 22454
+
+Starting iterations...
+Iteration 14661 (of 22454): max relative diff=0.000113, 5.02 sec so far
+
+Iterative method: 22454 iterations in 7.16 seconds (average 0.000292, setup 0.59)
+
+Value in the initial state: 0.9888371481482322
+
+Time for model checking: 7.53 seconds.
+
+Result: 0.9888371481482322
+
+---------------------------------------------------------------------
+
+Model checking: P=? [ F<=T "established" ]
+Model constants: attack=1,defense=2,d_f=18,D_max=255,ratio_F=2,f_type=0,multi=0,w_I=0.5
+Property constants: T=60
+
+Computing probabilities...
+Engine: Hybrid
+
+Number of non-absorbing states: 33690 of 33881 (99.4%)
+
+Building hybrid MTBDD matrix... [levels=34, nodes=52358] [2.4 MB]
+Adding explicit sparse matrices... [levels=34, num=1, compact] [394.6 KB]
+Creating vector for diagonals... [dist=53, compact] [66.6 KB]
+Allocating iteration vectors... [3 x 264.7 KB]
+TOTAL: [3.6 MB]
+
+Uniformisation: q.t = 2121.600000 x 60.000000 = 127296.000000
+Fox-Glynn: left = 124796, right = 130325
+
+Starting iterations...
+Iteration 15261 (of 130325): max relative diff=0.000096, 5.02 sec so far
+Iteration 26599 (of 130325): max relative diff=0.000003, 10.03 sec so far
+Iteration 37722 (of 130325): max relative diff=0.000000, 15.05 sec so far
+
+Steady state detected at iteration 39860
+
+Iterative method: 39860 iterations in 16.41 seconds (average 0.000404, setup 0.31)
+
+Value in the initial state: 0.9998853241626344
+
+Time for model checking: 18.039 seconds.
+
+Result: 0.9998853241626344
+
+Exporting results as list (CSV) to file "experiments\E7v3_df18_b.csv"...
+
+---------------------------------------------------------------------
+
+Note: There were 20 warnings during computation.
+

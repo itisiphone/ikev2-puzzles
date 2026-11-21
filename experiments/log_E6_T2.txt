@@ -1,0 +1,1408 @@
+PRISM
+=====
+
+Version: 4.10.1
+Date: Fri Nov 20 19:14:21 2026
+Memory limits: cudd=1g, java(heap)=7.9g
+Command line: prism ikev2_rq2.sm 'experiments\ikev2_rq2_exp.props' -gs -maxiters 100000 -const 'attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=8:2:24' -exportresults 'experiments\E6_T2.csv:csv'
+
+Parsing PRISM model file "ikev2_rq2.sm"...
+
+Type:        CTMC
+Modules:     responder
+Actions:     [l_arrive] [l_done] [l_expire] [a_arrive] [a_serve] [a_expire]
+Variables:   ha hl q
+Labels:      "resp_full" "cpu_saturated" "legit_blocked"
+Rewards:     "legit_success" "resp_cpu" "att_cpu" "resp_mem"
+
+Parsing properties file "experiments\ikev2_rq2_exp.props"...
+
+4 properties:
+(1) S=? [ "resp_full" ]
+(2) R{"legit_success"}=? [ S ]
+(3) R{"resp_cpu"}=? [ S ]
+(4) R{"att_cpu"}=? [ S ]
+
+---------------------------------------------------------------------
+
+Model checking: S=? [ "resp_full" ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=8
+
+Building model (engine:symbolic)...
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=8
+
+Warning: Guard for command 6 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 111 iterations in 0.02 seconds (average 0.000144, setup 0.00)
+
+Time for model construction: 0.056 seconds.
+
+Type:        CTMC
+States:      14586 (1 initial)
+Transitions: 80070
+
+Rate matrix: 5616 nodes (604 terminal), 80070 minterms, vars: 16r/16c
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.14 seconds (average 0.000147, setup 0.08)
+
+BSCC 1 probability: 0.5095396046287138
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.5095396046287138
+
+Time for model checking: 0.175 seconds.
+
+Result: 0.5095396046287138
+
+---------------------------------------------------------------------
+
+Model checking: R{"legit_success"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=8
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.16 seconds (average 0.000145, setup 0.09)
+
+BSCC 1 Reward: 0.4782953121819044
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.4782953121819044
+
+Time for model checking: 0.153 seconds.
+
+Result: 0.4782953121819044
+
+---------------------------------------------------------------------
+
+Model checking: R{"resp_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=8
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.14 seconds (average 0.000145, setup 0.08)
+
+BSCC 1 Reward: 0.005691024299999999
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.0056910243
+
+Time for model checking: 0.146 seconds.
+
+Result: 0.0056910243
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=8
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.16 seconds (average 0.000185, setup 0.08)
+
+BSCC 1 Reward: 0.1425231616
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.1425231616
+
+Time for model checking: 0.157 seconds.
+
+Result: 0.1425231616
+
+---------------------------------------------------------------------
+
+Model checking: S=? [ "resp_full" ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=10
+
+Building model (engine:symbolic)...
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=10
+
+Warning: Guard for command 6 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 111 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Time for model construction: 0.011 seconds.
+
+Type:        CTMC
+States:      14586 (1 initial)
+Transitions: 80070
+
+Rate matrix: 5616 nodes (604 terminal), 80070 minterms, vars: 16r/16c
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.14 seconds (average 0.000145, setup 0.08)
+
+BSCC 1 probability: 0.5095396046287138
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.5095396046287138
+
+Time for model checking: 0.161 seconds.
+
+Result: 0.5095396046287138
+
+---------------------------------------------------------------------
+
+Model checking: R{"legit_success"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=10
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.11 seconds (average 0.000110, setup 0.06)
+
+BSCC 1 Reward: 0.4782953121819044
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.4782953121819044
+
+Time for model checking: 0.15 seconds.
+
+Result: 0.4782953121819044
+
+---------------------------------------------------------------------
+
+Model checking: R{"resp_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=10
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.14 seconds (average 0.000145, setup 0.08)
+
+BSCC 1 Reward: 0.005691024299999999
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.0056910243
+
+Time for model checking: 0.159 seconds.
+
+Result: 0.0056910243
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=10
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.12 seconds (average 0.000147, setup 0.06)
+
+BSCC 1 Reward: 0.4200926464
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.4200926464
+
+Time for model checking: 0.144 seconds.
+
+Result: 0.4200926464
+
+---------------------------------------------------------------------
+
+Model checking: S=? [ "resp_full" ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=12
+
+Building model (engine:symbolic)...
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=12
+
+Warning: Guard for command 6 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 111 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Time for model construction: 0.014 seconds.
+
+Type:        CTMC
+States:      14586 (1 initial)
+Transitions: 80070
+
+Rate matrix: 5616 nodes (604 terminal), 80070 minterms, vars: 16r/16c
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.12 seconds (average 0.000145, setup 0.06)
+
+BSCC 1 probability: 0.5095396046287138
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.5095396046287138
+
+Time for model checking: 0.145 seconds.
+
+Result: 0.5095396046287138
+
+---------------------------------------------------------------------
+
+Model checking: R{"legit_success"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=12
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.14 seconds (average 0.000147, setup 0.08)
+
+BSCC 1 Reward: 0.4782953121819044
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.4782953121819044
+
+Time for model checking: 0.146 seconds.
+
+Result: 0.4782953121819044
+
+---------------------------------------------------------------------
+
+Model checking: R{"resp_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=12
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.14 seconds (average 0.000145, setup 0.08)
+
+BSCC 1 Reward: 0.005691024299999999
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.0056910243
+
+Time for model checking: 0.151 seconds.
+
+Result: 0.0056910243
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=12
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.14 seconds (average 0.000147, setup 0.08)
+
+BSCC 1 Reward: 1.5303705856
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 1.5303705856
+
+Time for model checking: 0.149 seconds.
+
+Result: 1.5303705856
+
+---------------------------------------------------------------------
+
+Model checking: S=? [ "resp_full" ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=14
+
+Building model (engine:symbolic)...
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=14
+
+Warning: Guard for command 6 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 111 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Time for model construction: 0.014 seconds.
+
+Type:        CTMC
+States:      14586 (1 initial)
+Transitions: 80070
+
+Rate matrix: 5616 nodes (604 terminal), 80070 minterms, vars: 16r/16c
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.14 seconds (average 0.000147, setup 0.08)
+
+BSCC 1 probability: 0.5095396046287138
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.5095396046287138
+
+Time for model checking: 0.148 seconds.
+
+Result: 0.5095396046287138
+
+---------------------------------------------------------------------
+
+Model checking: R{"legit_success"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=14
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.14 seconds (average 0.000145, setup 0.08)
+
+BSCC 1 Reward: 0.4782953121819044
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.4782953121819044
+
+Time for model checking: 0.147 seconds.
+
+Result: 0.4782953121819044
+
+---------------------------------------------------------------------
+
+Model checking: R{"resp_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=14
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.14 seconds (average 0.000145, setup 0.08)
+
+BSCC 1 Reward: 0.005691024299999999
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.0056910243
+
+Time for model checking: 0.152 seconds.
+
+Result: 0.0056910243
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=14
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.14 seconds (average 0.000145, setup 0.08)
+
+BSCC 1 Reward: 5.971482342399999
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 5.9714823424
+
+Time for model checking: 0.151 seconds.
+
+Result: 5.9714823424
+
+---------------------------------------------------------------------
+
+Model checking: S=? [ "resp_full" ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=16
+
+Building model (engine:symbolic)...
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=16
+
+Warning: Guard for command 6 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 111 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Time for model construction: 0.013 seconds.
+
+Type:        CTMC
+States:      14586 (1 initial)
+Transitions: 80070
+
+Rate matrix: 5616 nodes (604 terminal), 80070 minterms, vars: 16r/16c
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.17 seconds (average 0.000220, setup 0.08)
+
+BSCC 1 probability: 0.5095396046287138
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.5095396046287138
+
+Time for model checking: 0.205 seconds.
+
+Result: 0.5095396046287138
+
+---------------------------------------------------------------------
+
+Model checking: R{"legit_success"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=16
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.28 seconds (average 0.000364, setup 0.12)
+
+BSCC 1 Reward: 0.4782953121819044
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.4782953121819044
+
+Time for model checking: 0.306 seconds.
+
+Result: 0.4782953121819044
+
+---------------------------------------------------------------------
+
+Model checking: R{"resp_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=16
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.27 seconds (average 0.000327, setup 0.12)
+
+BSCC 1 Reward: 0.005691024299999999
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.0056910243
+
+Time for model checking: 0.294 seconds.
+
+Result: 0.0056910243
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=16
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.23 seconds (average 0.000292, setup 0.11)
+
+BSCC 1 Reward: 23.735929369600004
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 23.735929369600004
+
+Time for model checking: 0.254 seconds.
+
+Result: 23.735929369600004
+
+---------------------------------------------------------------------
+
+Model checking: S=? [ "resp_full" ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=18
+
+Building model (engine:symbolic)...
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=18
+
+Warning: Guard for command 6 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 111 iterations in 0.03 seconds (average 0.000279, setup 0.00)
+
+Time for model construction: 0.022 seconds.
+
+Type:        CTMC
+States:      14586 (1 initial)
+Transitions: 80070
+
+Rate matrix: 5616 nodes (604 terminal), 80070 minterms, vars: 16r/16c
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.30 seconds (average 0.000364, setup 0.14)
+
+BSCC 1 probability: 0.5095396046287138
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.5095396046287138
+
+Time for model checking: 0.332 seconds.
+
+Result: 0.5095396046287138
+
+---------------------------------------------------------------------
+
+Model checking: R{"legit_success"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=18
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.19 seconds (average 0.000255, setup 0.08)
+
+BSCC 1 Reward: 0.4782953121819044
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.4782953121819044
+
+Time for model checking: 0.238 seconds.
+
+Result: 0.4782953121819044
+
+---------------------------------------------------------------------
+
+Model checking: R{"resp_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=18
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.23 seconds (average 0.000255, setup 0.12)
+
+BSCC 1 Reward: 0.005691024299999999
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.0056910243
+
+Time for model checking: 0.265 seconds.
+
+Result: 0.0056910243
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=18
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6200] [290.6 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13788, compact] [136.2 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 428 iterations in 0.23 seconds (average 0.000292, setup 0.11)
+
+BSCC 1 Reward: 94.79371747840003
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 94.79371747840003
+
+Time for model checking: 0.243 seconds.
+
+Result: 94.79371747840003
+
+---------------------------------------------------------------------
+
+Model checking: S=? [ "resp_full" ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=20
+
+Building model (engine:symbolic)...
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=20
+
+Warning: Guard for command 6 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 111 iterations in 0.00 seconds (average 0.000000, setup 0.00)
+
+Time for model construction: 0.022 seconds.
+
+Type:        CTMC
+States:      14586 (1 initial)
+Transitions: 80070
+
+Rate matrix: 5625 nodes (605 terminal), 80070 minterms, vars: 16r/16c
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6211] [291.1 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13900, compact] [137.1 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [907.1 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 1445 iterations in 0.52 seconds (average 0.000292, setup 0.09)
+
+BSCC 1 probability: 1.3992268882923284E-5
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 1.3992268882923284E-5
+
+Time for model checking: 0.545 seconds.
+
+Result: 1.3992268882923284E-5
+
+---------------------------------------------------------------------
+
+Model checking: R{"legit_success"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=20
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6211] [291.1 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13900, compact] [137.1 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [907.1 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 1445 iterations in 0.48 seconds (average 0.000270, setup 0.09)
+
+BSCC 1 Reward: 0.975183136821949
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.975183136821949
+
+Time for model checking: 0.542 seconds.
+
+Result: 0.975183136821949
+
+---------------------------------------------------------------------
+
+Model checking: R{"resp_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=20
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6211] [291.1 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13900, compact] [137.1 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [907.1 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 1445 iterations in 0.55 seconds (average 0.000303, setup 0.11)
+
+BSCC 1 Reward: 0.0019787323274305275
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.001978732327430519
+
+Time for model checking: 0.586 seconds.
+
+Result: 0.001978732327430519
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=20
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6211] [291.1 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13900, compact] [137.1 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [907.1 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 1445 iterations in 0.58 seconds (average 0.000302, setup 0.14)
+
+BSCC 1 Reward: 100.0500000000004
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 100.0500000000004
+
+Time for model checking: 0.618 seconds.
+
+Result: 100.0500000000004
+
+---------------------------------------------------------------------
+
+Model checking: S=? [ "resp_full" ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=22
+
+Building model (engine:symbolic)...
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=22
+
+Warning: Guard for command 6 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 111 iterations in 0.01 seconds (average 0.000135, setup 0.00)
+
+Time for model construction: 0.052 seconds.
+
+Type:        CTMC
+States:      14586 (1 initial)
+Transitions: 80070
+
+Rate matrix: 5625 nodes (605 terminal), 80070 minterms, vars: 16r/16c
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6211] [291.1 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13718, compact] [135.7 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.6 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 1492 iterations in 0.58 seconds (average 0.000325, setup 0.09)
+
+BSCC 1 probability: 5.749881098007343E-27
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.607 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: R{"legit_success"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=22
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6211] [291.1 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13718, compact] [135.7 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.6 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 1492 iterations in 0.56 seconds (average 0.000304, setup 0.11)
+
+BSCC 1 Reward: 0.9751968295102311
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.9751968295102311
+
+Time for model checking: 0.576 seconds.
+
+Result: 0.9751968295102311
+
+---------------------------------------------------------------------
+
+Model checking: R{"resp_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=22
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6211] [291.1 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13718, compact] [135.7 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.6 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 1492 iterations in 0.69 seconds (average 0.000367, setup 0.14)
+
+BSCC 1 Reward: 9.807144843576305E-4
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 9.807144843576297E-4
+
+Time for model checking: 0.693 seconds.
+
+Result: 9.807144843576297E-4
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=22
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6211] [291.1 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13718, compact] [135.7 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.6 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 1492 iterations in 0.67 seconds (average 0.000367, setup 0.12)
+
+BSCC 1 Reward: 100.05000000000005
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 100.05000000000005
+
+Time for model checking: 0.711 seconds.
+
+Result: 100.05000000000005
+
+---------------------------------------------------------------------
+
+Model checking: S=? [ "resp_full" ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=24
+
+Building model (engine:symbolic)...
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=24
+
+Warning: Guard for command 6 of module "responder" is never satisfied.
+
+Computing reachable states...
+
+Reachability (BFS): 111 iterations in 0.03 seconds (average 0.000288, setup 0.00)
+
+Time for model construction: 0.031 seconds.
+
+Type:        CTMC
+States:      14586 (1 initial)
+Transitions: 80070
+
+Rate matrix: 5625 nodes (605 terminal), 80070 minterms, vars: 16r/16c
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6211] [291.1 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13719, compact] [135.7 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 1630 iterations in 0.69 seconds (average 0.000336, setup 0.14)
+
+BSCC 1 probability: 1.932892939177153E-54
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.0
+
+Time for model checking: 0.7 seconds.
+
+Result: 0.0
+
+---------------------------------------------------------------------
+
+Model checking: R{"legit_success"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=24
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6211] [291.1 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13719, compact] [135.7 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 1630 iterations in 0.67 seconds (average 0.000336, setup 0.12)
+
+BSCC 1 Reward: 0.9751968413730953
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 0.9751968413730953
+
+Time for model checking: 0.716 seconds.
+
+Result: 0.9751968413730953
+
+---------------------------------------------------------------------
+
+Model checking: R{"resp_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=24
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6211] [291.1 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13719, compact] [135.7 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 1630 iterations in 0.59 seconds (average 0.000288, setup 0.12)
+
+BSCC 1 Reward: 7.312100235894081E-4
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 7.312100235894074E-4
+
+Time for model checking: 0.678 seconds.
+
+Result: 7.312100235894074E-4
+
+---------------------------------------------------------------------
+
+Model checking: R{"att_cpu"}=? [ S ]
+Model constants: attack=2,defense=2,lam_att=100,rho=0.5,N_bots=100,H=50,tau_R=2,theta=0,k=24
+
+SCCs: 1, BSCCs: 1, non-BSCC states: 0
+BSCC sizes: 1:14586
+
+Computing steady state probabilities for BSCC 1
+
+Computing probabilities...
+Engine: Hybrid
+
+Building hybrid MTBDD matrix... [levels=16, nodes=6211] [291.1 KB]
+Splitting into blocks... [levels=6, n=51, nnz=151, compact] [0.8 KB]
+Adding explicit sparse matrices... [levels=10, num=151, compact] [359.7 KB]
+Creating vector for diagonals... [dist=13719, compact] [135.7 KB]
+Allocating iteration vectors... [114.0 KB + 4.4 KB = 118.3 KB]
+TOTAL: [905.7 KB]
+
+Starting iterations...
+
+Gauss-Seidel: 1630 iterations in 0.70 seconds (average 0.000345, setup 0.14)
+
+BSCC 1 Reward: 100.05000000000008
+
+All states are in BSCCs (so no reachability probabilities computed)
+
+Value in the initial state: 100.05000000000008
+
+Time for model checking: 0.719 seconds.
+
+Result: 100.05000000000008
+
+Exporting results as list (CSV) to file "experiments\E6_T2.csv"...
+
+---------------------------------------------------------------------
+
+Note: There were 9 warnings during computation.
+
